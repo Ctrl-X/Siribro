@@ -23,12 +23,13 @@ We will remove this dependency in a future version.
 
 * Download the minified version of siribro from the dist folder.
 * Link the javascript at the end of your html page :
- `<script type="application/javascript" src="siribro.min.js"></script>`
+	`<script type="application/javascript" src="siribro.min.js"></script>`
 * Now just call Siribro from your main function like :
-        $(function() {
+        
+		  `$(function() {
             siribro.loadMD("bot.md")
                 .start();
-        });
+        });`
 
 As you can see, you will have to load a dialog file (here "bot.md") that will feed siribro. You can read the section "Create a dialog file" for more information on the option you have
 
