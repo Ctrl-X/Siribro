@@ -23,7 +23,9 @@ We will remove this dependency in a future version.
 
 * Download the minified version of siribro from the dist folder.
 * Link the javascript at the end of your html page :
+	
 	`<script type="application/javascript" src="siribro.min.js"></script>`
+	
 * Now just call Siribro from your main function like :
         
 		  `$(function() {
@@ -38,9 +40,9 @@ As you can see, you will have to load a dialog file (here "bot.md") that will fe
 ## Set Options to customize your setup
 Siribro have some options that you can provide to tweak the component. Just call `setOptions(...)` before your start the dialog :
 	
-	siribro.loadJson("data/bot.json")
+	siribro.loadJson(...)
 		.setOptions({"isPersistHistory":false,"isLogEnabled":false})
-		.start();
+		.start(...);
   
  ### List of available options :  
  * isLogEnabled : 
@@ -75,10 +77,13 @@ You could add a custom function :
       })  
       .start("Beginning");`
       
-And now in your bot.md, you call call your custom function like this :
+And now in your bot.md, you call call your custom function like this in the dialog file :
 >    \* Can you provide me an email ?
+
 >    \* \`input(email)\`
+
 >    \* Ok, now let me check if I find your account...
+
 >    \* \`checkOnServer()\`
 
 ## Create a  dialogue file
