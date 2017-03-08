@@ -1,0 +1,363 @@
+[
+	{
+		"type": "bloc",
+		"label": "Beginning",
+		"steps": [
+			{
+				"type": "pause",
+				"millisecond": "1000"
+			},
+			{
+				"type": "sentence",
+				"text": "Bonjour ! | Salut !"
+			},
+			{
+				"type": "sentence",
+				"text": "Je suppose que vous êtes ici pour le concours Facebook?"
+			},
+			{
+				"type": "input",
+				"data": "campaign1"
+			},
+			{
+				"type": "optionGroup",
+				"options": [
+					{
+						"type": "option",
+						"values": [
+							{
+								"type": "regex",
+								"value": "non|no|nop"
+							}
+						],
+						"steps": [
+							{
+								"type": "sentence",
+								"text": "D'accord."
+							},
+							{
+								"type": "sentence",
+								"text": "Souhaitez-vous des renseignements sur ce que nous faisons chez \"raconte-moi\"?"
+							},
+							{
+								"type": "input",
+								"data": "wantInformation"
+							},
+							{
+								"type": "optionGroup",
+								"options": [
+									{
+										"type": "option",
+										"values": [
+											{
+												"type": "regex",
+												"value": "non|no|nop"
+											}
+										],
+										"steps": [
+											{
+												"type": "sentence",
+												"text": "Ok je ne vous dérange pas plus."
+											},
+											{
+												"type": "sentence",
+												"text": "Si vous avez besoin de moi, je suis dans les parages ;)"
+											}
+										]
+									},
+									{
+										"type": "option",
+										"values": [
+											{
+												"type": "regex",
+												"value": "bien\\s?sur|pourquoi\\s?pas|d.?accord.*|ok|why\\s?not"
+											},
+											{
+												"type": "string",
+												"value": "Oui"
+											},
+											{
+												"type": "string",
+												"value": "Peut-être"
+											}
+										],
+										"steps": [
+											{
+												"type": "goto",
+												"value": "HumanMode"
+											}
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"type": "option",
+						"values": [
+							{
+								"type": "string",
+								"value": "Carrement"
+							},
+							{
+								"type": "regex",
+								"value": ".*oui.*|bien\\s?sur|pourquoi\\s?pas|d.?accord|ok|why\\s?not|.*pret.*|"
+							},
+							{
+								"type": "string",
+								"value": "Peut-être"
+							}
+						],
+						"steps": [
+							{
+								"type": "sentence",
+								"text": "Afin de valider votre participation au concours, je vais vous poser 7 questions simples qui resteront anonyme et confidentiel. Promis, cela ne sera pas long. Êtes-vous prêt(e)?"
+							},
+							{
+								"type": "input",
+								"data": "readyToAnswer"
+							},
+							{
+								"type": "optionGroup",
+								"options": [
+									{
+										"type": "option",
+										"values": [
+											{
+												"type": "regex",
+												"value": "non|no|nop"
+											}
+										],
+										"steps": [
+											{
+												"type": "sentence",
+												"text": "Ok pas de soucis."
+											},
+											{
+												"type": "sentence",
+												"text": "Je reste dans les parages si vous avez besoin de moi. ;)"
+											}
+										]
+									},
+									{
+										"type": "option",
+										"values": [
+											{
+												"type": "regex",
+												"value": ".*oui.*|bien\\s?sur|pourquoi\\s?pas|d.?accord|ok|why\\s?not|.*pret.*|"
+											},
+											{
+												"type": "string",
+												"value": "Peut-être"
+											}
+										],
+										"steps": [
+											{
+												"type": "sentence",
+												"text": "Ok tout d’abord, puis-je avoir votre age?"
+											},
+											{
+												"type": "input",
+												"data": "age"
+											},
+											{
+												"type": "sentence",
+												"text": "Et votre sexe (Homme ou Femme)"
+											},
+											{
+												"type": "input",
+												"data": "gender"
+											},
+											{
+												"type": "sentence",
+												"text": "Votre ville de résidence ?"
+											},
+											{
+												"type": "input",
+												"data": "city"
+											},
+											{
+												"type": "sentence",
+												"text": "Avez-vous des enfants ?"
+											},
+											{
+												"type": "input",
+												"data": "child"
+											},
+											{
+												"type": "sentence",
+												"text": "Ok c'est noté"
+											},
+											{
+												"type": "sentence",
+												"text": "Maintenant, j’ai 3 dernières questions en rapport avec notre mission :)"
+											},
+											{
+												"type": "sentence",
+												"text": "Est-ce que l’un de vos parents est-il encore en vie?"
+											},
+											{
+												"type": "input",
+												"data": "parentAlive"
+											},
+											{
+												"type": "optionGroup",
+												"options": [
+													{
+														"type": "option",
+														"values": [
+															{
+																"type": "regex",
+																"value": "non|no|nop"
+															}
+														],
+														"steps": [
+															{
+																"type": "sentence",
+																"text": "J’en suis désolé"
+															},
+															{
+																"type": "pause",
+																"millisecond": "3000"
+															},
+															{
+																"type": "goto",
+																"value": "Product"
+															}
+														]
+													},
+													{
+														"type": "option",
+														"values": [
+															{
+																"type": "regex",
+																"value": "bien\\s?sur|un|Deux|1|2"
+															},
+															{
+																"type": "string",
+																"value": "Oui"
+															},
+															{
+																"type": "string",
+																"value": "Peut-être"
+															}
+														],
+														"steps": [
+															{
+																"type": "sentence",
+																"text": "D'accord"
+															},
+															{
+																"type": "goto",
+																"value": "Product"
+															}
+														]
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	{
+		"type": "bloc",
+		"label": "Product",
+		"steps": [
+			{
+				"type": "sentence",
+				"text": "Premiere step du Product Bloc !!!"
+			},
+			{
+				"type": "sentence",
+				"text": "Avez-vous un chien?"
+			},
+			{
+				"type": "input",
+				"data": "chien"
+			},{
+				"type": "optionGroup",
+				"options": [
+					{
+						"type": "option",
+						"values": [
+							{
+								"type": "regex",
+								"value": "non|no|nop"
+							}
+						],
+						"steps": [
+							{
+								"type": "sentence",
+								"text": "D'accord."
+							}
+						]
+					},
+					{
+						"type": "option",
+						"values": [
+							{
+								"type": "regex",
+								"value": "bien\\s?sur|pourquoi\\s?pas|d.?accord|ok|why\\s?not"
+							},
+							{
+								"type": "string",
+								"value": "Oui"
+							},
+							{
+								"type": "string",
+								"value": "Peut-être"
+							}
+						],
+						"steps": [
+							{
+								"type": "sentence",
+								"text": "Moi aussi j'aime les chiens ^^"
+							}
+						]
+					}
+				]
+			},{
+				"type": "sentence",
+				"text": "Merci ! Au revoir "
+			}
+		]
+	},
+	{
+		"type" : "bloc",
+		"label" : "FuncTest",
+		"steps" : [
+			{
+				"type": "sentence",
+				"text": "Puis-je avoir votre email ?"
+			},
+			{
+				"type": "input",
+				"data": "email"
+			},
+			{
+				"type" : "function",
+				"name" : "checkOnServer",
+				"params" : [
+					{
+						"type": "string",
+						"value": "youpi"
+					},
+					{
+						"type": "variable",
+						"value": "email"
+					}
+				]
+			},
+			{
+				"type": "sentence",
+				"text": "Merci c'est OK !"
+			}
+		]
+	}
+]
