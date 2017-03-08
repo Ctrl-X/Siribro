@@ -17,9 +17,9 @@ You can find a basic dialog sample here :
 
 ## Easy install & try !
 
-1. Download the minified version of siribro from the dist folder.
-2. Download the sample bot dialog file [bot.md](TODO)
-3. Link the javascript at the end of your html page :
+1. Download the minified version of [siribro.js](TODO).
+2. Download the sample dialog file [bot.md](TODO)
+3. Link the javascript in your html page :
 	
 	`<script type="application/javascript" src="siribro.min.js"></script>`
 	
