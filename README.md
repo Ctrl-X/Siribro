@@ -1,7 +1,7 @@
 Work in Progress... Unstable version
 Description may not reflect the actual work
 
-Siribro : The Bot that think
+# Siribro : The Bot that think and act like human
 
 ## Intro
 Siribro is a dialog based bot that can adapt his flow based on the answers of the user.
