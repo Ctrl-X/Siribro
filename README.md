@@ -23,7 +23,7 @@ You can find a basic dialog sample here :
 
 ## Easy to try !
 
-1. Download the minified version of [siribro.js](TODO).
+1. Download [siribro.min.js](TODO).
 2. Download the sample dialog file [bot.md](TODO)
 3. Link the javascript in your html page :
 	
@@ -31,10 +31,10 @@ You can find a basic dialog sample here :
 	
 4. Now just call Siribro from your main function like :
         
-		  `$(function() {
-            siribro.loadMD("bot.md")
-                .start();
-        });`
+	`$(function() {
+			siribro.loadMD("bot.md")
+            .start();
+     });`
 5. Open the index.html from your localhost server
 6. Enjoy your discussion !
 
