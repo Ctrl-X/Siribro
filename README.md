@@ -29,8 +29,10 @@ You can find a basic dialog sample here :
             siribro.loadMD("bot.md")
                 .start();
         });`
+5. Open the index.html from your localhost server
+6. Enjoy your discussion !
 
-As you can see, you will have to load a dialog file (here "bot.md") that will feed siribro. You can read the section "Create a dialog file" for more information on the option you have
+Now you can learn more by reading "How to create a dialog file"
 
 
 ## Dependency
