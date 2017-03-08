@@ -1,3 +1,6 @@
+Work in Progress... Unstable version
+Description may not reflect the actual work
+
 Siribro : The Bot that think
 
 ## Intro
