@@ -1,11 +1,16 @@
-Work in Progress... Unstable version
+Work in Progress... 
+Unstable version...
 Description may not reflect the actual work
 
 # Siribro : The Bot that think and act like human
 
+
 ## Intro
 Siribro is a dialog based bot that can adapt his flow based on the answers of the user.
 You can build a very complex dialog flow to handle many scenario or just play with a simple introduction dialog. 
+You can run Siribro for any project even those without a server side code (like an moblie hybrid app).
+
+
 
 ## Dialog File Format
 Siribro use either *JSON* or *Markdown* to parse the discussion flow. Most of the time, you will prefer the simplicity of markdown, but in case you want to build the discussion from a server side database (or else), JSON is supported natively in many server side technology (php, JAVA, etc).
@@ -15,7 +20,8 @@ You can find a basic dialog sample here :
 
 
 
-## Easy install & try !
+
+## Easy to try !
 
 1. Download the minified version of [siribro.js](TODO).
 2. Download the sample dialog file [bot.md](TODO)
@@ -35,9 +41,11 @@ You can find a basic dialog sample here :
 Now you can learn more by reading "How to create a dialog file"
 
 
-## Dependency
+
+## Dependencies
 Siribro has only a *jQuery* dependency. It is only used for DOM control and AJAX request. Any version of jQuery should work.
 We will remove this dependency in a future version.
+
 
 
 
@@ -48,7 +56,7 @@ Siribro have some options that you can provide to tweak the component. Just call
 		.setOptions({"isPersistHistory":false,"isLogEnabled":false})
 		.start(...);
   
- ### List of available options :  
+##### Available options :  
  * isLogEnabled : 
  	* Usage : display some debug output in the console 
  	* default value : true
@@ -61,6 +69,8 @@ Siribro have some options that you can provide to tweak the component. Just call
  * readingSpeed : 
  	* Usage : Number of character read per second by the Bot
 	* default value : 50
+
+
 
 
 ## Add Custom Function
@@ -90,9 +100,12 @@ And now in your bot.md, you call call your custom function like this in the dial
 
 >    \* \`checkOnServer()\`
 
+
+
+
 ## Create a  dialogue file
 TODO
-### Create a JSON  dialogue file
+##### Create a JSON  dialogue file
 TODO
-### Create a  Markdown dialogue file
+##### Create a  Markdown dialogue file
 TODO
