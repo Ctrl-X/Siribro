@@ -38,7 +38,7 @@ You can find a basic dialog sample here :
 5. Open the index.html from your localhost server
 6. Enjoy your discussion !
 
-Now you can learn more by reading "How to create a dialog file"
+Now you can learn more by reading *"How to create a dialog file"*
 
 
 
@@ -103,7 +103,7 @@ And now in your bot.md, you call call your custom function like this in the dial
 
 
 
-## Create a  dialogue file
+## How to create a dialog file
 TODO
 ##### Create a JSON  dialogue file
 TODO
