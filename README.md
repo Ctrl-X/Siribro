@@ -14,19 +14,16 @@ You can find a basic dialog sample here :
 * [Markdown format] (http://TODO)
 
 
-## Dependency
-Siribro has only a *jQuery* dependency. It is only used for DOM control and AJAX request. Any version of jQuery should work.
-We will remove this dependency in a future version.
-
 
 ## Easy install & try !
 
-* Download the minified version of siribro from the dist folder.
-* Link the javascript at the end of your html page :
+1 Download the minified version of siribro from the dist folder.
+2 Download the sample bot dialog file [bot.md](TODO)
+3 Link the javascript at the end of your html page :
 	
 	`<script type="application/javascript" src="siribro.min.js"></script>`
 	
-* Now just call Siribro from your main function like :
+4 Now just call Siribro from your main function like :
         
 		  `$(function() {
             siribro.loadMD("bot.md")
@@ -34,6 +31,11 @@ We will remove this dependency in a future version.
         });`
 
 As you can see, you will have to load a dialog file (here "bot.md") that will feed siribro. You can read the section "Create a dialog file" for more information on the option you have
+
+
+## Dependency
+Siribro has only a *jQuery* dependency. It is only used for DOM control and AJAX request. Any version of jQuery should work.
+We will remove this dependency in a future version.
 
 
 
@@ -77,7 +79,7 @@ You could add a custom function :
       })  
       .start("Beginning");`
       
-And now in your bot.md, you call call your custom function like this in the dialog file :
+And now in your bot.md, you call call your custom function like this in the dialog *.md* file :
 >    \* Can you provide me an email ?
 
 >    \* \`input(email)\`
