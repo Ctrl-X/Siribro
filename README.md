@@ -35,11 +35,25 @@ As you can see, you will have to load a dialog file (here "bot.md") that will fe
 
 
 ## Set Options to customize your setup
-Siribro have some configuration options that you can provide to tweak the behavior 
- * isLogEnabled : display some debug output in the console (default : true)
- * isPersistHistory : when set to true, it will save the discussion for later. If the user come back, the bot will resume the disucssion and display the history. (default :false)
- * typingSpeed : Number of character typed per second by the Bot (default : 20)
- * readingSpeed : Number of character read per second by the Bot (default : 50)
+Siribro have some options that you can provide to tweak the component. Just call `setOptions(...)` before your start the dialog :
+	
+	siribro.loadJson("data/bot.json")
+		.setOptions({"isPersistHistory":false,"isLogEnabled":false})
+		.start();
+  
+ ### List of available options :  
+ * isLogEnabled : 
+ 	* Usage : display some debug output in the console 
+ 	* default value : true
+ * isPersistHistory : 
+ 	* Usage : when set to true, it will save the discussion for later. If the user come back, the bot will resume the disucssion and display the history. 
+ 	* default value : false
+ * typingSpeed : 
+ 	* Usage : Number of character typed per second by the Bot 
+ 	* default value : 20
+ * readingSpeed : 
+ 	* Usage : Number of character read per second by the Bot
+	* default value : 50
 
 
 ## Add Custom Function
