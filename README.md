@@ -2,7 +2,7 @@ Work in Progress...
 Unstable version...
 Description may not reflect the actual work
 
-# Siribro : The Bot that think and act like human
+# Siribro : The Bot that looks like human
 
 
 ## Intro
@@ -82,7 +82,7 @@ You could add a custom function :
         $.ajax({
           method: "POST",
           url: "checkemail.php",
-          data: { email: siribro.answers["email"] }
+          data: { email: siribro.answers["email"] }  // send the email that were answered from the user input
           })
           .done(function( msg ) {
             if(msg == "OK")
