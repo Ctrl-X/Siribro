@@ -6,7 +6,7 @@ Description may not reflect the actual work
 
 
 ## Intro
-Siribro is a dialog based bot that can adapt his flow based on the answers of the user.
+Siribro is a dialog based bot that can adapt his behavior based on the answers of the user.
 You can build a very complex dialog flow to handle many scenario or just play with a simple introduction dialog. 
 You can run Siribro for any project even those without a server side code (like an moblie hybrid app).
 
@@ -51,10 +51,9 @@ For simplicity, we will only present the markdown version but you can find all d
 
 
 
-##
-
 ## Customization
-There is already a lot of way to customize Siribro. Each section will discuss about a specific aspect.
+There is a lot of way to customize Siribro. Feel free to reach me at  *julien at myly.fr*
+Each section will discuss about a specific aspect.
 
 
 ### Set Options to customize your setup
@@ -102,15 +101,20 @@ $(function() {
       
 And now in your bot.md, you can call your custom function like this in the dialog *.md* file :
 ```markdown
-* Can you provide me an email ?
+* Could you provide me an email so I can check your identity?
 * `input(email)`
-* Ok, now let me check if I find your account...
+* Ok, let me check. This should only take a few seconds...
 * `checkOnServer()`
 ```
 
-It your custom handler you can use the `siribro.answers[]` array to get an answer from the user
+It your custom handler you can use the `siribro.answers[]` array to get answers from the user
 
-There is virtually no limit in what you could do ( display something on your website during a walkthrough, do a background action,etc)
+There is virtually no limit in what you could do :
+* Save all answers on your database
+* Display something on your website during a walkthrough
+* Do a background action
+* Send an email
+* etc
 
 The only thing to remember is to call `siribro.next();` at the end of your action to resume the discussion flow.
 
