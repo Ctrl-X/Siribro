@@ -166,7 +166,7 @@ To go to a specific dialog bloc, use the `goto()` function like this :
 ```
 
 
-#### Sentence
+#### Sentence 
 A dialog contain sentences. To write a sentence, use the list symbol like this :
 ```markdown
 * first sentence
@@ -177,16 +177,16 @@ A dialog contain sentences. To write a sentence, use the list symbol like this :
 
 
 #### Answers
-A discussion is usually based on sentence, questions and answers. You can ask any question to the user and get his input with the comand :
+A discussion is usually based on sentences(phrase or question) and answers. You can ask any question to the user and get his input with the comand :
 ```markdown
 * `input()`
 ```
 If you provide a parameter to the input, then Siribro will save the answer into the `siribro.answers[]` array with the name of your param as the index.
-Given the user has provided an input, then the discussion will proceed. There is one exception to that behavior : decision options (see **Decisions** section). 
+Given the user has provided an input, then the discussion will proceed. There is one exception to that behavior : Decision (see **Decisions** section). 
 
 
 #### Decisions
-Usually a discussion is not linear. Based on the answers, you will take decision to adapt the following discussion path.
+Usually a discussion is not linear. Based on the answers, Siribro need take decision to adapt the following discussion path.
 To create a discussion branch, you will have to use an ordered list notation and indent to the right all child path like this :
 ```markdown
 * `input()`
@@ -199,9 +199,8 @@ In the `1. OK` , "OK" represent the value that will be compared to the user answ
 * a plain string
 * multiple choice separated with a pipe `|` 
 * a regex
-* a reference to a value bloc more on that in the **Value Bloc** section
-
-If you want to take decision based on the user answer (saved or not), you can
+* a reference to a value bloc (more on that in the **Value Bloc** section)
+* a function name like `checkOnServer` (more on that in the **Add a custom handler** section)
 
 Tips : You should always ask closed questions (yes/no type or with a reduced set on possibility) if you want to achieve a smooth decision flow.
 
@@ -291,8 +290,8 @@ $(function() {
       .start("Beginning");`
 });  
 ```
-      
-And now in your bot.md, you can call your custom function like this in the dialog *.md* file :
+### Call a function  in a Sentence 
+In your bot.md, you can call your custom function like this :
 ```markdown
 * Could you provide me an email so I can check your identity?
 * `input(email)`
@@ -302,6 +301,7 @@ And now in your bot.md, you can call your custom function like this in the dialo
 
 It your custom handler you can use the `siribro.answers[]` array to get answers from the user
 
+
 There is virtually no limit in what you could do :
 * Save all answers in your database
 * Display something on your website during a walkthrough
@@ -309,6 +309,31 @@ There is virtually no limit in what you could do :
 * Send an email
 * etc
 
-The only thing to remember is to call `siribro.next();` at the end of your action to resume the discussion flow.
+The only thing to remember is to call `siribro.next()` at the end of your action to resume the discussion flow. 
+If you provide a param to the `next(...)` function, it will be used in the very next Decision (more on Decision in **Decision** section)
+
+
+### Call a function  in a Decision
+You can take a decision based on a custom function like :
+```markdown
+* Could you give me your age ?
+* `input(age)`
+	1. `ageBelow18`
+		* You are too young
+	2. Other
+		* ok, next step !
+```
+
+where `ageBelow18` is a custom function you added :
+```javascript
+siribro.addFunction("ageBelow18",function(){
+	if (siribro.answers["age"] < 18){
+		siribro.next(false);
+	}else
+	{
+		siribro.next(true);
+	}
+});
+```
 
 
