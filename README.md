@@ -68,10 +68,13 @@ We focus on a human readability and flexible tooling. A exemple is worth a thous
 			2. Other
 				* Oh I see. 
 				* Maybe we can stay in touch!
-				* ...
+				* `goto(Finish)`
 	2. Other
 		* Ok no prob. Let me know if you need anything ;)
-		* Have a great day !
+		* `goto(Finish)`
+		
+#Finish
+* Have a great day !
 
 [Yes]
 	* yes
