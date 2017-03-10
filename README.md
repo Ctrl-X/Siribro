@@ -2,17 +2,14 @@ Work in Progress...
 Unstable version...
 Description may not reflect the actual work
 
-# Siribro : The Bot that looks like human
-
-
-# Description
-Siribro is a dialog based bot that can adapt his behavior based on the answers of the user.
+# Siribro.js : The Bot that looks like human
+Siribro is a dialog based bot in javascript that can adapt his behavior based on the answers of the user.
 You can build a very complex dialog flow to handle many scenario or just play with a simple conversation. 
 You can run Siribro on any project even those without a server side code (like an moblie hybrid app).
 
 
 # Dependencies
-Siribro has only a *jQuery* dependency. It is used for DOM control and AJAX request. Any version of jQuery should work.
+Siribro has only a **jQuery** dependency. It is used for DOM control and AJAX request. Any version of jQuery should work.
 We will try to remove this dependency in a future version.
 
 
@@ -20,7 +17,7 @@ We will try to remove this dependency in a future version.
 
 * Download [siribro.min.js](TODO).
 * Get a sample dialog file like [bot.md](TODO)
-* Link the javascript in your html page :
+* Link the javascript to your html page :
 ```html	
 <script type="application/javascript" src="siribro.min.js"></script>
 ```
@@ -133,9 +130,10 @@ option name | type | default value | Description
 
 
 ## How to write a dialog file
-Siribro use the concept of dialog Bloc (in contrast to form based bot). 
-A good guideline to follow is to always write your discussion in a guided way. Don't ask open question or try to avoid questions from the user.
-If you do have user question's, you will have to face random situations that are far more complex to handle. Actually, you would probably have to write sort of machine learning algorithm.
+Siribro use the concept of dialog Bloc (in contrast to form based bots). 
+
+:information_source: Tips : A good guideline to follow is to always write your discussion in a guided way. Don't ask open question and avoid questions from the user.
+If you do face a user question, you will have to handle random situations that are far more complex to manage. Actually, you would probably have to write sort of machine learning algorithm...
 
 ### What is a Dialog bloc
 A dialog bloc is just a conversation flow that begin and end with the last line of the bloc.
@@ -187,7 +185,8 @@ There is one exception to that behavior : Decision (see **Decisions** section).
 
 ### Decisions
 Usually a discussion is not linear. Based on the answers, Siribro need take decision to adapt the following discussion path.
-Tips : You should always ask closed questions (yes/no type or with a reduced set on possibility) if you want to achieve a smooth decision flow.
+
+:information_source: Tips : You should always ask closed questions (yes/no type or with a reduced set on possibility) if you want to achieve a smooth decision flow.
 
 To create a discussion branch, you will have to use an ordered list notation and indent to the right all child path like this :
 ```markdown
@@ -202,7 +201,7 @@ In the `1. OK` , "OK" represent the value that will be compared to the user answ
 * multiple choice separated with a pipe `|` 
 * a regex
 * a \[reference\] to a value bloc (more on that in the **Value Bloc** section)
-* a \`function\` name like \`ageBelow18\` (more on that in the **Add a custom handler** section)
+* a \`function\` name like \`ageBelow18\` (more on that in the **Advanced : Add a custom handler** section)
 
 If none of the answer match a value, Siribro will wait and not proceed with the next sentence/step.
 
@@ -269,7 +268,7 @@ Then somewhere in a discussion bloc
 
 
 
-## Advanced  Add a custom handler
+## Advanced : Add a custom handler
 You can add some custom function to do something during the dialog flow. 
 Let say you want to check something on the server before pursuing the discussion.
 
