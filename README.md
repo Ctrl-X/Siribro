@@ -39,7 +39,7 @@ $(function() {
 Usually, bots use a form based approach : They convert an existing form into a bot.
 Siribro use a different approach. 
 
-When we developped Siribro, we had in mind the simplicity for the developper and/or the scenarist to use it (modify the dialog, create new one, etc). 
+When we developed Siribro, we had in mind the simplicity for the developper and/or the scenarist to use it (modify the discussion, create new one, etc). 
 
 So we focused on the human readability aspect while keeping a flexible set of advanced tools. 
 A exemple is worth a thousand words, so `bot.md :` looks like :
@@ -107,7 +107,7 @@ Now you can start the dialog with `start()`. It takes a optional parameter to se
 ```javascript	
 siribro.start(); // will begin from the first dialog bloc in the file
 ```
-
+or
 ```javascript	
 siribro.start("Beginning"); // will begin from the #Beginning dialog bloc 
 ```
@@ -179,6 +179,9 @@ A discussion is usually based on sentences(phrase or question) and answers. You 
 If you provide a parameter to the input, then Siribro will save the answer into the `siribro.answers[]` array with the name of your param as the index.
 Given the user has provided an input, then the discussion will proceed. There is one exception to that behavior : Decision (see **Decisions** section). 
 
+```markdown
+* `input(city)` // siribro.answers["city"] will contain the answer of the user
+```
 
 #### Decisions
 Usually a discussion is not linear. Based on the answers, Siribro need take decision to adapt the following discussion path.
