@@ -30,7 +30,7 @@ We will try to remove this dependency in a future version.
 		siribro.loadMD("bot.md")
 			.start();
 		});
-		```
+	```
 5. Navigate to the page on your localhost server
 
 Now you can learn more by reading **"How to create a dialog file"**
