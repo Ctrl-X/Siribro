@@ -108,13 +108,18 @@ or
 siribro.loadJson("file.md");	
 ```
 
+Now you can start the dialog with `start()`. It takes a optional parameter to set the entry point of the discussion (the name of a dialog bloc) .
+```javascript	
+siribro.start(); // will begin from the first dialog bloc in the file
+```
+
 
 ### Set Options to customize your setup
 Siribro have some options that you can provide to tweak the component. Just call `setOptions(...)` before your start the dialog :
 ```javascript	
 siribro.loadMD(...)
 	.setOptions({"isPersistHistory":false,"isLogEnabled":false})
-	.start(...);
+	.start("Beginning");
 ```
 
 ##### Available options :  
@@ -136,7 +141,7 @@ You could add a custom function :
 ```javascript
 $(function() {
 
-    siribro.loadJson("data/bot.md")
+    siribro.loadMD("data/bot.md")
       .addFunction("checkOnServer",function(){
         $.ajax({
           method: "POST",
