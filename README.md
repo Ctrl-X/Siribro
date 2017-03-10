@@ -298,6 +298,7 @@ In your bot.md, you can call your custom function like this :
 * `input(email)`
 * Ok, let me check. This should only take a few seconds...
 * `checkOnServer()`
+* --> Will wait until `siribro.next()` is call from `checkOnServer()` function
 ```
 
 It your custom handler you can use the `siribro.answers[]` array to get answers from the user
@@ -315,17 +316,17 @@ If you provide a param to the `next(...)` function, it will be used in the very 
 
 
 ### Call a function  in a Decision
-You can take a decision based on a custom function like :
+As for sentences, you can take a decision based on a custom function :
 ```markdown
 * Could you give me your age ?
 * `input(age)`
-	1. `ageBelow18`
+	1. `ageBelow18()`
 		* You are too young
 	2. Other
 		* ok, next step !
 ```
 
-where `ageBelow18` is a custom function you added :
+where `ageBelow18()` is a custom function that could be :
 ```javascript
 siribro.addFunction("ageBelow18",function(){
 	if (siribro.answers["age"] < 18){
@@ -336,5 +337,8 @@ siribro.addFunction("ageBelow18",function(){
 	}
 });
 ```
+
+
+
 
 
