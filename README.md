@@ -330,10 +330,10 @@ where `ageBelow18()` is a custom function that could be :
 ```javascript
 siribro.addFunction("ageBelow18",function(){
 	if (siribro.answers["age"] < 18){
-		siribro.next(false);
+		siribro.next(true);
 	}else
 	{
-		siribro.next(true);
+		siribro.next(false);
 	}
 });
 ```
