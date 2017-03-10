@@ -47,7 +47,7 @@ It has in mind the simplicity for the developper and/or the conversation scenari
 
 We focus on a human readability and flexible tooling. A exemple is worth a thousand words :
 
-bot.md
+`bot.md content :`
 ```markdown
 #Beginning
 * `pause(3000)`
