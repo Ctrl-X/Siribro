@@ -47,9 +47,11 @@ Siribro has only a *jQuery* dependency. It is only used for DOM control and AJAX
 We will remove this dependency in a future version.
 
 
+## Customization
+There is already a lot of way to customize Siribro. Each section will discuss about a specific aspect.
 
 
-## Set Options to customize your setup
+### Set Options to customize your setup
 Siribro have some options that you can provide to tweak the component. Just call `setOptions(...)` before your start the dialog :
 ```javascript	
 siribro.loadJson(...)
@@ -68,7 +70,7 @@ option name | type | default value | Description
 
 
 
-## Add Custom Function
+### Add a custom handler
 You can add some custom function to do something during the dialog flow. 
 Let say you want to check something on the server before pursuing the discussion.
 
@@ -100,6 +102,9 @@ And now in your bot.md, you can call your custom function like this in the dialo
 * `checkOnServer()`
 ```
 
+There is virtually no limit in what you could do ( display something in your website during a walkthrough, do a background action,etc)
+
+The only thing to remember is to call `siribro.next();` at the end of your action to resume the discussion flow.
 
 
 ## How to create a dialog file
