@@ -44,9 +44,9 @@ Now you can learn more by reading **"How to create a dialog file"**
 Usually, bots use a form based approach : They convert an existing form into a bot.
 Siribro use a different approach. 
 
-We we developped Siribro, we had in mind the simplicity for the developper and/or the conversation scenarist to use it (modify the dialog, create new one, etc). 
+When we developped Siribro, we had in mind the simplicity for the developper and/or the scenarist to use it (modify the dialog, create new one, etc). 
 
-So we focused on a human readability while keeping a flexible set of advanced tools. 
+So we focused on the human readability aspect while keeping a flexible set of advanced tools. 
 A exemple is worth a thousand words, so `bot.md :` looks like :
 ```markdown
 #Beginning
@@ -95,8 +95,8 @@ You can dive more into a dialog file construction in **How to write a dialog fil
 
 
 ## Documentation
-There is a lot of way to customize Siribro. Feel free to reach me at  *julien at myly.fr*
-Each section will discuss about a specific aspect.
+There is a lot of ways to customize Siribro for your need.
+Each section will discuss about one specific aspect.
 
 
 ### Set Options to customize your setup
@@ -186,7 +186,7 @@ To create a discussion branch, you will have to use an ordered list notation and
     2. NOT OK
         * ...
 ```
-In the `1. OK` , "OK" represent the string that will be compared to the user answer. It can be :
+In the `1. OK` , "OK" represent the value that will be compared to the user answer. It can be :
 * a plain string
 * multiple choice separated with a pipe `|` 
 * a regex
