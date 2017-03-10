@@ -177,14 +177,18 @@ A discussion is usually based on sentences(phrase or question) and answers. You 
 * `input()`
 ```
 If you provide a parameter to the input, then Siribro will save the answer into the `siribro.answers[]` array with the name of your param as the index.
-Given the user has provided an input, then the discussion will proceed. There is one exception to that behavior : Decision (see **Decisions** section). 
+
 
 ```markdown
 * `input(city)` // siribro.answers["city"] will contain the answer of the user
 ```
+As soon as the user has provided a value, then the discussion will proceed. 
+There is one exception to that behavior : Decision (see **Decisions** section). 
 
 #### Decisions
 Usually a discussion is not linear. Based on the answers, Siribro need take decision to adapt the following discussion path.
+Tips : You should always ask closed questions (yes/no type or with a reduced set on possibility) if you want to achieve a smooth decision flow.
+
 To create a discussion branch, you will have to use an ordered list notation and indent to the right all child path like this :
 ```markdown
 * `input()`
@@ -200,11 +204,12 @@ In the `1. OK` , "OK" represent the value that will be compared to the user answ
 * a \[reference\] to a value bloc (more on that in the **Value Bloc** section)
 * a \`function\` name like \`ageBelow18\` (more on that in the **Add a custom handler** section)
 
-Tips : You should always ask closed questions (yes/no type or with a reduced set on possibility) if you want to achieve a smooth decision flow.
+If none of the answer match a value, Siribro will wait and not proceed with the next sentence/step.
 
-##### Catch all answer 
+
+##### Catch-all decision 
 By default, if the answer don't match any value, Siribro will wait until an answer that match. 
-If you want to by pass that behavior, you can add a last option with the value Other like this : 
+If you want to by pass that behavior, you can add a last option with the value `Other`, like this : 
 ```markdown
 * Are you happy ?
 	1. Yes
