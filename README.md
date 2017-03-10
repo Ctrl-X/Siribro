@@ -204,18 +204,19 @@ In the `1. OK` , "OK" represent the value that will be compared to the user answ
 
 Tips : You should always ask closed questions (yes/no type or with a reduced set on possibility) if you want to achieve a smooth decision flow.
 
-##### Answer Management
-By default, if the answer don't match any options, Siribro will wait until an answer that match. 
+##### Catch all answer 
+By default, if the answer don't match any value, Siribro will wait until an answer that match. 
 If you want to by pass that behavior, you can add a last option with the value Other like this : 
->	* Are you happy ?
->  	1. Yes
->    		* Great !
->     	* Let's have a beer !
->		2. No
-> 			* Ok so why not having a beer !
->		3. Other
->			* Well I'm confused...
- 
+```markdown
+* Are you happy ?
+	1. Yes
+		* Great !
+		* Let's have a beer !
+	2. No
+		* Ok so why not having a beer !
+	3. Other
+		* Well I'm confused...
+``` 
 
 #### Multiple values
 Usually, there is multiple way of saying something. So Siribro do support values lists. It's a powerfull feature that help you :
