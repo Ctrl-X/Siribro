@@ -224,7 +224,8 @@ Usually, there is multiple way of saying something. So Siribro do support values
 * Handle multiple answer in one option
 
 #### Value Bloc ( Display Random phrase or accept multiple value)
-When you want a dialog that can be replayed by the same person without noticing too much that it's not human, you can add multiple random sentence or just a part of a sentence.
+##### For sentences
+When you want a discussion that can be replayed by the same person without noticing too much that it's not human, you can add multiple random sentence or just a part of a sentence.
 You will have to define a reference at the root of the document like this 
 
 Ex :
@@ -240,9 +241,8 @@ Then somewhere in the discussion :
 * [Hello], how are you ?
 ```
 
-
-Same approach is used to accept a wide set of answer is just on option choice. 
-
+#### For Decisions
+Same approach is used to accept a wide set of answer to take a decision. 
 Let say you want to interpret *ok*, *agree* and *fine* as a "ok", you could write a value bloc
 ```markdown
 [Ok]
@@ -263,9 +263,6 @@ Then somewhere in a discussion bloc
 		* I'm sad
 		* ...
 ```
-
-
-
 
 
 
