@@ -316,7 +316,7 @@ If you provide a param to the `next(...)` function, it will be used in the very 
 
 
 ### Call a function  in a Decision
-As for sentences, you can take a decision based on a custom function :
+As for sentences, Siribro can take a decision based on a custom function :
 ```markdown
 * Could you give me your age ?
 * `input(age)`
@@ -338,6 +338,10 @@ siribro.addFunction("ageBelow18",function(){
 });
 ```
 
+
+
+Have fun and feel free to give feedback or implementation you made !  
+:smile:
 
 
 
