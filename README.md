@@ -41,13 +41,13 @@ Now you can learn more by reading *"How to create a dialog file"*
 
 
 ## Dialog File
-Most of the bot use a form based approach ( They convert an existing form into a bot). Siribro use a different approach. 
+Usually, bots use a form based approach : They convert an existing form into a bot.
+Siribro use a different approach. 
 
-It has in mind the simplicity for the developper and/or the conversation scenarist. 
+We we developped Siribro, we had in mind the simplicity for the developper and/or the conversation scenarist to use it (modify the dialog, create new one, etc). 
 
-We focus on a human readability and flexible tooling. A exemple is worth a thousand words :
-
-`bot.md content :`
+So we focused on a human readability while keeping a flexible set of advanced tools. 
+A exemple is worth a thousand words, so `bot.md :`
 ```markdown
 #Beginning
 * `pause(3000)`
