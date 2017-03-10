@@ -138,12 +138,12 @@ option name | type | default value | Description
 
 
 ### How to write a dialog file
-Siribro use the concept of discussion Bloc. A bloc begin with a name and is separeted by a new line from other blocs.
+Siribro use the concept of dialog Bloc (in contrast to form based bot). 
 A good guideline to follow is to always write your discussion in a guided way. Don't ask open question or try to avoid questions from the user.
 If you do have user question's, you will have to face random situations that are far more complex to handle. Actually, you would probably have to write sort of machine learning algorithm.
 
-#### Dialog bloc
-A dialog bloc is just a conversation flow that begin and end with the last line of the bloc
+#### What is a Dialog bloc
+A dialog bloc is just a conversation flow that begin and end with the last line of the bloc.
 You can write multiple dialog block in your file. It become very useful to go to a specific dialog bloc after a serie of interaction, so that you can redirect multiple path to one single ending.
 
 ```markdown
