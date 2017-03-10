@@ -137,54 +137,44 @@ option name | type | default value | Description
 
 
 
-
-### Add a custom handler
-You can add some custom function to do something during the dialog flow. 
-Let say you want to check something on the server before pursuing the discussion.
-
-You could add a custom function :
-```javascript
-$(function() {
-    siribro.loadMD("data/bot.md")
-      .addFunction("checkOnServer",function(){
-        $.ajax({
-          method: "POST",
-          url: "checkemail.php",
-          data: { email: siribro.answers["email"] }  // send the email that were answered from the user input
-          })
-          .done(function( msg ) {
-            if(msg == "OK")
-              siribro.next(); // Resume the discussion flow
-          });
-      })  
-      .start("Beginning");`
-});  
-```
-      
-And now in your bot.md, you can call your custom function like this in the dialog *.md* file :
-```markdown
-* Could you provide me an email so I can check your identity?
-* `input(email)`
-* Ok, let me check. This should only take a few seconds...
-* `checkOnServer()`
-```
-
-It your custom handler you can use the `siribro.answers[]` array to get answers from the user
-
-There is virtually no limit in what you could do :
-* Save all answers in your database
-* Display something on your website during a walkthrough
-* Do a background action
-* Send an email
-* etc
-
-The only thing to remember is to call `siribro.next();` at the end of your action to resume the discussion flow.
-
-
 ### How to write a dialog file
 Siribro use the concept of discussion Bloc. A bloc begin with a name and is separeted by a new line from other blocs.
 A good guideline to follow is to always write your discussion in a guided way. Don't ask open question or try to avoid questions from the user.
 If you do have user question's, you will have to face random situations that are far more complex to handle. Actually, you would probably have to write sort of machine learning algorithm.
+
+#### Dialog bloc
+A dialog bloc is just a conversation flow that begin and end with the last line of the bloc
+You can write multiple dialog block in your file. It become very useful to go to a specific dialog bloc after a serie of interaction, so that you can redirect multiple path to one single ending.
+
+```markdown
+#DialogOne
+* first sentence of dialog one
+* second sentence of dialog one
+
+#DialogTwo
+* first sentence of dialog two
+* second sentence of dialog two
+
+```
+
+To go to a specific dialog bloc, use the `goto()` function like this :
+```markdown
+#DialogOne
+* first sentence of dialog one
+* `goto(DialogTwo)`
+
+```
+
+
+#### Sentence
+A dialog contain sentences. To write a sentence, use the list symbol like this :
+```markdown
+* first sentence
+* second sentence
+* third sentence
+
+```
+
 
 #### Answers
 A discussion is usually based on sentence, questions and answers. You can ask any question to the user and get his input with the comand :
@@ -275,4 +265,50 @@ If you want to by pass that behaavior, you can add a lat option with the value O
 >		3. Other
 >			* Well I'm confused...
  
+
+
+
+
+### Add a custom handler
+You can add some custom function to do something during the dialog flow. 
+Let say you want to check something on the server before pursuing the discussion.
+
+You could add a custom function :
+```javascript
+$(function() {
+    siribro.loadMD("data/bot.md")
+      .addFunction("checkOnServer",function(){
+        $.ajax({
+          method: "POST",
+          url: "checkemail.php",
+          data: { email: siribro.answers["email"] }  // send the email that were answered from the user input
+          })
+          .done(function( msg ) {
+            if(msg == "OK")
+              siribro.next(); // Resume the discussion flow
+          });
+      })  
+      .start("Beginning");`
+});  
+```
+      
+And now in your bot.md, you can call your custom function like this in the dialog *.md* file :
+```markdown
+* Could you provide me an email so I can check your identity?
+* `input(email)`
+* Ok, let me check. This should only take a few seconds...
+* `checkOnServer()`
+```
+
+It your custom handler you can use the `siribro.answers[]` array to get answers from the user
+
+There is virtually no limit in what you could do :
+* Save all answers in your database
+* Display something on your website during a walkthrough
+* Do a background action
+* Send an email
+* etc
+
+The only thing to remember is to call `siribro.next();` at the end of your action to resume the discussion flow.
+
 
