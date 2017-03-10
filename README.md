@@ -129,11 +129,11 @@ siribro.loadMD(...)
 ##### Available options :  
 option name | type | default value | Description
 ------------ | ------------- | ------------- | -------------
+`botface` | string | base64 | url of the picture face of the bot (32x32px) 
 `isLogEnabled` | boolean | `true` | display some debug output in the console
 `isPersistHistory` | boolean | `false` | when set to true, it will save the discussion for later. If the user come back, the bot will display the history.
 `typingSpeed` | integer | `20` | Number of character typed per second by the Bot 
 `readingSpeed` | integer | `50` | Number of character read per second by the Bot 
-`botface` | string | base64 | url of the picture face of the bot (32x32px) 
 
 
 
@@ -145,7 +145,6 @@ Let say you want to check something on the server before pursuing the discussion
 You could add a custom function :
 ```javascript
 $(function() {
-
     siribro.loadMD("data/bot.md")
       .addFunction("checkOnServer",function(){
         $.ajax({
@@ -173,7 +172,7 @@ And now in your bot.md, you can call your custom function like this in the dialo
 It your custom handler you can use the `siribro.answers[]` array to get answers from the user
 
 There is virtually no limit in what you could do :
-* Save all answers on your database
+* Save all answers in your database
 * Display something on your website during a walkthrough
 * Do a background action
 * Send an email
@@ -249,7 +248,7 @@ Let say you want to interpret *ok*, *agree* and *fine* as a "ok", you could writ
 	* fine
 ```
 
-and somewhere in a discussion bloc 
+Then somewhere in a discussion bloc 
 ```markdown
 #Dialog
 (...)
@@ -265,7 +264,7 @@ and somewhere in a discussion bloc
 
 
 #### Answer Management
-By default,  if the answer don't match any options, Siribro will wait until an answer that match. 
+By default, if the answer don't match any options, Siribro will wait until an answer that match. 
 If you want to by pass that behaavior, you can add a lat option with the value Other like this : 
 >	* Are you happy ?
 >  	1. Yes
