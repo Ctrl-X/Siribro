@@ -21,7 +21,10 @@ We will try to remove this dependency in a future version.
 1. Download [siribro.min.js](TODO).
 2. Download a sample dialog file like [bot.md](TODO)
 3. Link the javascript in your html page :
+```html	
 	<script type="application/javascript" src="siribro.min.js"></script>
+```
+	
 4. Call Siribro from your main function like :
 ```javascript	
 $(function() {
