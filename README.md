@@ -132,7 +132,7 @@ option name | type | default value | Description
 ## How to write a dialog file
 Siribro use the concept of dialog Bloc (in contrast to form based bots). 
 
-:information_source: Tips : A good guideline to follow is to always write your discussion in a guided way. Don't ask open question and avoid questions from the user.
+:information_source: A good habit to follow is to always write your discussion in a guided way. Don't ask open question and avoid questions from the user.
 If you do face a user question, you will have to handle random situations that are far more complex to manage. Actually, you would probably have to write sort of machine learning algorithm...
 
 ### What is a Dialog bloc
@@ -186,7 +186,7 @@ There is one exception to that behavior : Decision (see **Decisions** section).
 ### Decisions
 Usually a discussion is not linear. Based on the answers, Siribro need take decision to adapt the following discussion path.
 
-:information_source: Tips : You should always ask closed questions (yes/no type or with a reduced set on possibility) if you want to achieve a smooth decision flow.
+:information_source: You should always ask closed questions (yes/no type or with a reduced set on possibility) if you want to achieve a smooth decision flow.
 
 To create a discussion branch, you will have to use an ordered list notation and indent to the right all child path like this :
 ```markdown
@@ -217,15 +217,16 @@ If you want to by pass that behavior, you can add a last option with the value `
 	2. No
 		* Ok so why not having a beer !
 	3. Other
-		* Well I'm confused...
+		* -> This will handle any other answer
+
 ``` 
 
-### Value Bloc ( Display Random phrase or accept multiple value)
+### Value Bloc (  Random sentences or multi-value Decisions)
 Usually, there is multiple way of saying something. So Siribro do support values lists. It's a powerfull feature that help you :
 * Propose random sentence to the user
 * Handle multiple answer in one option
 
-#### For sentences
+#### Random sentences
 When you want a discussion that can be replayed by the same person without noticing too much that it's not human, you can add multiple random sentence or just a part of a sentence.
 You will have to define a reference at the root of the document like this 
 
@@ -244,7 +245,7 @@ Then somewhere in the discussion :
 
 #### For Decisions
 Same approach is used to accept a wide set of answer to take a decision. 
-Let say you want to interpret *ok*, *agree* and *fine* as a "ok", you could write a value bloc
+Let say you want to interpret **ok**, **agree** and **fine** as a *"ok"*, you could write a value bloc
 ```markdown
 [Ok]
 	* ok
