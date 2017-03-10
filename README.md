@@ -51,24 +51,19 @@ We will remove this dependency in a future version.
 
 ## Set Options to customize your setup
 Siribro have some options that you can provide to tweak the component. Just call `setOptions(...)` before your start the dialog :
-	
-	siribro.loadJson(...)
-		.setOptions({"isPersistHistory":false,"isLogEnabled":false})
-		.start(...);
-  
+```javascript	
+siribro.loadJson(...)
+	.setOptions({"isPersistHistory":false,"isLogEnabled":false})
+	.start(...);
+```
+
 ##### Available options :  
- * isLogEnabled : 
- 	* Usage : display some debug output in the console 
- 	* default value : true
- * isPersistHistory : 
- 	* Usage : when set to true, it will save the discussion for later. If the user come back, the bot will resume the disucssion and display the history. 
- 	* default value : false
- * typingSpeed : 
- 	* Usage : Number of character typed per second by the Bot 
- 	* default value : 20
- * readingSpeed : 
- 	* Usage : Number of character read per second by the Bot
-	* default value : 50
+option name | type | default value | Description
+------------ | ------------- | ------------- | -------------
+`isLogEnabled` | boolean | `true` | display some debug output in the console
+`isPersistHistory` | boolean | `false` | when set to true, it will save the discussion for later. If the user come back, the bot will display the history.
+`typingSpeed` | integer | `20` | Number of character typed per second by the Bot 
+`readingSpeed` | integer | `50` | Number of character read per second by the Bot 
 
 
 
@@ -76,7 +71,7 @@ Siribro have some options that you can provide to tweak the component. Just call
 ## Add Custom Function
 You can add some custom function to do something during the dialog flow. Let say you want to check something on the server before pursuing the discussion.
 You could add a custom function :
-```markdown
+```javascript
 siribro.loadJson("data/bot.md")
   .addFunction("checkOnServer",function(){
     $.ajax({
