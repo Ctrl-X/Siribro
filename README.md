@@ -47,7 +47,7 @@ Siribro use a different approach.
 We we developped Siribro, we had in mind the simplicity for the developper and/or the conversation scenarist to use it (modify the dialog, create new one, etc). 
 
 So we focused on a human readability while keeping a flexible set of advanced tools. 
-A exemple is worth a thousand words, so `bot.md :`
+A exemple is worth a thousand words, so `bot.md :` looks like :
 ```markdown
 #Beginning
 * `pause(3000)`
@@ -59,10 +59,10 @@ A exemple is worth a thousand words, so `bot.md :`
 	1.	[Yes]
 		* Cool ;)
 		* We are a small company based in Montreal
-		* We are selling appartment downtown
+		* We sell or rent appartment downtown
 		* Where are you living?
 		* `input(city)`
-			1. Montreal | downtown | 
+			1. Montreal | downtown
 				* Really ? that's fantastic, let's have a beer!
 				* ...
 			2. Other
@@ -83,6 +83,7 @@ A exemple is worth a thousand words, so `bot.md :`
 
 ```
 
+
 Siribro use either *JSON* or *Markdown* to compute the discussion flow. 
 Most of the time, you will prefer the simplicity of markdown, but if you want to build the discussion from a server side database (or else), JSON is supported natively in many server side technology (php, JAVA, etc) so it may be the best choice.
 
@@ -90,7 +91,7 @@ For simplicity, we will only present the markdown version but you can find all d
 * [JSON format] (http://TODO)
 * [Markdown format] (http://TODO)
 
-
+You can dive more into a dialog file construction in How to write a dialog file
 
 
 ## Customization
@@ -161,18 +162,16 @@ There is virtually no limit in what you could do :
 The only thing to remember is to call `siribro.next();` at the end of your action to resume the discussion flow.
 
 
-## How to create a dialog file
-TODO
-### Create a JSON  dialogue file
-TODO
-### Create a  Markdown dialogue file
+## How to write a dialog file
+Siribro use the concept of discussion Bloc. A bloc begin with a name and is separeted by a new line from other blocs.
 
-#### Multiple values
+
+### Multiple values
 Usually, there is multiple way of saying something. So Siribro do support values lists. It's a powerfull feature that help you :
 * Propose random sentence to the user
 * Handle multiple answer in one option
 
-###### Propose multiple sentence
+### Propose multiple sentence
 When you want a dialog that can be replayed by the same person without noticing too much that it's not human, you can add multiple random sentence or just a part of a sentence.
 You will have to define a reference at the root of the document like this 
 
