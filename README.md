@@ -19,10 +19,10 @@ We will try to remove this dependency in a future version.
 ## Installation 
 
 * Download [siribro.min.js](TODO).
-* Download a sample dialog file like [bot.md](TODO)
+* Get a sample dialog file like [bot.md](TODO)
 * Link the javascript in your html page :
 ```html	
-	    <script type="application/javascript" src="siribro.min.js"></script>
+<script type="application/javascript" src="siribro.min.js"></script>
 ```
 * Call Siribro from your main function like :
 ```javascript	
@@ -33,8 +33,6 @@ $(function() {
 ```
 * Navigate to the page on your localhost server
  
-Now you can learn more by reading **"How to create a dialog file"**
-
 
 
 ## Dialog File
@@ -88,7 +86,7 @@ For simplicity, we will only present the markdown version but you can find all d
 * [JSON format] (http://TODO)
 * [Markdown format] (http://TODO)
 
-You can dive more into a dialog file construction in the **How to write a dialog file** section
+Now you can learn more by reading the **"How to create a dialog file"** section
 
 
 ## Documentation
