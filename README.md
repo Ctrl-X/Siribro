@@ -268,7 +268,7 @@ If you want to by pass that behaavior, you can add a lat option with the value O
 
 
 
-### Add a custom handler
+## Advanced  Add a custom handler
 You can add some custom function to do something during the dialog flow. 
 Let say you want to check something on the server before pursuing the discussion.
 
