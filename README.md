@@ -92,7 +92,7 @@ You could add a custom function :
       .start("Beginning");`
       
 And now in your bot.md, you can call your custom function like this in the dialog *.md* file :
-```
+```markdown
 * Can you provide me an email ?
 * \`input(email)\`
 * Ok, now let me check if I find your account...
