@@ -69,22 +69,27 @@ option name | type | default value | Description
 
 
 ## Add Custom Function
-You can add some custom function to do something during the dialog flow. Let say you want to check something on the server before pursuing the discussion.
+You can add some custom function to do something during the dialog flow. 
+Let say you want to check something on the server before pursuing the discussion.
+
 You could add a custom function :
 ```javascript
-siribro.loadJson("data/bot.md")
-  .addFunction("checkOnServer",function(){
-    $.ajax({
-      method: "POST",
-      url: "checkemail.php",
-      data: { email: siribro.answers["email"] }  // send the email that were answered from the user input
-      })
-      .done(function( msg ) {
-        if(msg == "OK")
-          siribro.next(); // Resume the discussion flow
-      });
-  })  
-  .start("Beginning");`
+$(function() {
+
+    siribro.loadJson("data/bot.md")
+      .addFunction("checkOnServer",function(){
+        $.ajax({
+          method: "POST",
+          url: "checkemail.php",
+          data: { email: siribro.answers["email"] }  // send the email that were answered from the user input
+          })
+          .done(function( msg ) {
+            if(msg == "OK")
+              siribro.next(); // Resume the discussion flow
+          });
+      })  
+      .start("Beginning");`
+});  
 ```
       
 And now in your bot.md, you can call your custom function like this in the dialog *.md* file :
