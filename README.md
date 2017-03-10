@@ -30,8 +30,9 @@ $(function() {
 	siribro.loadMD("bot.md")
 		.start();
 });
+```
 5. Navigate to the page on your localhost server
-6. Enjoy your discussion !
+6. Enjoy the discussion !
 
 
 
@@ -39,8 +40,42 @@ Now you can learn more by reading *"How to create a dialog file"*
 
 
 
-## Dialog File Format
-Siribro use either *JSON* or *Markdown* to parse the discussion flow. 
+## Dialog File
+Most of the bot use a form based approach ( They convert an existing form into a bot). Siribro use a different approach. 
+
+It has in mind the simplicity for the developper and/or the conversation scenarist. 
+We focus on a human readability and flexible tooling. A exemple is worth a thousand words :
+```markdown
+#Beginning
+* `pause(3000)`
+* Hello, how are you ?
+* `input(mood)`
+* My name is Julien, I would like to introduce our products
+* Shall I continue ?
+* `input()`
+	1.	[Yes]
+		* Cool ;)
+		* We are a small company based in Montreal
+		* We are selling appartment downtown
+		* Where are you living ?
+		* `input(city)`
+			1. Montreal
+				* Really ? that's fantastic, let's have a beer !
+			2. Other
+				* Oh I see. 
+	2. Other
+		* Ok no prob !
+		* Let me know if you need anything ;)
+		* Have a great day
+
+[Yes]
+	* yes
+	* sure
+	* ok
+
+```
+
+Siribro use either *JSON* or *Markdown* to compute the discussion flow. 
 Most of the time, you will prefer the simplicity of markdown, but if you want to build the discussion from a server side database (or else), JSON is supported natively in many server side technology (php, JAVA, etc) so it may be the best choice.
 
 For simplicity, we will only present the markdown version but you can find all dialog sample in JSON and MD here :
