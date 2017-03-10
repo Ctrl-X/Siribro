@@ -11,41 +11,47 @@ You can build a very complex dialog flow to handle many scenario or just play wi
 You can run Siribro for any project even those without a server side code (like an moblie hybrid app).
 
 
+## Dependencies
+Siribro has only a *jQuery* dependency. It is only used for DOM control and AJAX request. Any version of jQuery should work.
+We will remove this dependency in a future version.
+
+You don't even need a server side technology. A plain html page will do the job!
+
+## Let's try !
+
+1. Download [siribro.min.js](TODO).
+2. Download a sample dialog file [bot.md](TODO)
+3. Link the javascript in your html page :
+	
+	`<script type="application/javascript" src="siribro.min.js"></script>`
+	
+4. Call Siribro from your main function like :
+        
+	`$(function() {
+			siribro.loadMD("bot.md")
+            .start();
+     });`
+5. Navigate to the page on your localhost server
+6. Enjoy your discussion !
+
+
+
+Now you can learn more by reading *"How to create a dialog file"*
+
+
 
 ## Dialog File Format
-Siribro use either *JSON* or *Markdown* to parse the discussion flow. Most of the time, you will prefer the simplicity of markdown, but in case you want to build the discussion from a server side database (or else), JSON is supported natively in many server side technology (php, JAVA, etc).
-You can find a basic dialog sample here : 
+Siribro use either *JSON* or *Markdown* to parse the discussion flow. 
+Most of the time, you will prefer the simplicity of markdown, but if you want to build the discussion from a server side database (or else), JSON is supported natively in many server side technology (php, JAVA, etc) so it may be the best choice.
+
+For simplicity, we will only present the markdown version but you can find all dialog sample in JSON and MD here :
 * [JSON format] (http://TODO)
 * [Markdown format] (http://TODO)
 
 
 
 
-## Easy to try !
-
-1. Download [siribro.min.js](TODO).
-2. Download the sample dialog file [bot.md](TODO)
-3. Link the javascript in your html page :
-	
-	`<script type="application/javascript" src="siribro.min.js"></script>`
-	
-4. Now just call Siribro from your main function like :
-        
-	`$(function() {
-			siribro.loadMD("bot.md")
-            .start();
-     });`
-5. Open the index.html from your localhost server
-6. Enjoy your discussion !
-
-Now you can learn more by reading *"How to create a dialog file"*
-
-
-
-## Dependencies
-Siribro has only a *jQuery* dependency. It is only used for DOM control and AJAX request. Any version of jQuery should work.
-We will remove this dependency in a future version.
-
+##
 
 ## Customization
 There is already a lot of way to customize Siribro. Each section will discuss about a specific aspect.
@@ -102,7 +108,9 @@ And now in your bot.md, you can call your custom function like this in the dialo
 * `checkOnServer()`
 ```
 
-There is virtually no limit in what you could do ( display something in your website during a walkthrough, do a background action,etc)
+It your custom handler you can use the `siribro.answers[]` array to get an answer from the user
+
+There is virtually no limit in what you could do ( display something on your website during a walkthrough, do a background action,etc)
 
 The only thing to remember is to call `siribro.next();` at the end of your action to resume the discussion flow.
 
