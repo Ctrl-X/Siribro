@@ -7,30 +7,29 @@ Description may not reflect the actual work
 
 ## Intro
 Siribro is a dialog based bot that can adapt his behavior based on the answers of the user.
-You can build a very complex dialog flow to handle many scenario or just play with a simple introduction dialog. 
-You can run Siribro for any project even those without a server side code (like an moblie hybrid app).
+You can build a very complex dialog flow to handle many scenario or just play with a simple conversation. 
+You can run Siribro on any project even those without a server side code (like an moblie hybrid app).
 
 
 ## Dependencies
-Siribro has only a *jQuery* dependency. It is only used for DOM control and AJAX request. Any version of jQuery should work.
-We will remove this dependency in a future version.
+Siribro has only a *jQuery* dependency. It is used for DOM control and AJAX request. Any version of jQuery should work.
+We will try to remove this dependency in a future version.
 
-You don't even need a server side technology. A plain html page will do the job!
 
 ## Let's try !
 
 1. Download [siribro.min.js](TODO).
-2. Download a sample dialog file [bot.md](TODO)
+2. Download a sample dialog file like [bot.md](TODO)
 3. Link the javascript in your html page :
 	
 	`<script type="application/javascript" src="siribro.min.js"></script>`
 	
 4. Call Siribro from your main function like :
-        
-	`$(function() {
-			siribro.loadMD("bot.md")
-            .start();
-     });`
+```javascript	
+$(function() {
+	siribro.loadMD("bot.md")
+		.start();
+});
 5. Navigate to the page on your localhost server
 6. Enjoy your discussion !
 
