@@ -98,11 +98,21 @@ You can dive more into a dialog file construction in **How to write a dialog fil
 There is a lot of ways to customize Siribro for your need.
 Each section will discuss about one specific aspect.
 
+### Start the Dialog
+To start a dialog, you will need to provide a dialog file first. You can use `load...` like this :
+```javascript	
+siribro.loadMD("file.json");
+```
+or 
+```javascript	
+siribro.loadJson("file.md");	
+```
+
 
 ### Set Options to customize your setup
 Siribro have some options that you can provide to tweak the component. Just call `setOptions(...)` before your start the dialog :
 ```javascript	
-siribro.loadJson(...)
+siribro.loadMD(...)
 	.setOptions({"isPersistHistory":false,"isLogEnabled":false})
 	.start(...);
 ```
