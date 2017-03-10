@@ -51,25 +51,27 @@ bot.md
 ```markdown
 #Beginning
 * `pause(3000)`
-* Hello, how are you ?
+* Hello, how are you?
 * `input(mood)`
 * My name is Julien, I would like to introduce our products
-* Shall I continue ?
+* Shall I continue?
 * `input()`
 	1.	[Yes]
 		* Cool ;)
 		* We are a small company based in Montreal
 		* We are selling appartment downtown
-		* Where are you living ?
+		* Where are you living?
 		* `input(city)`
-			1. Montreal
-				* Really ? that's fantastic, let's have a beer !
+			1. Montreal | downtown | 
+				* Really ? that's fantastic, let's have a beer!
+				* ...
 			2. Other
 				* Oh I see. 
+				* Maybe we can stay in touch!
+				* ...
 	2. Other
-		* Ok no prob !
-		* Let me know if you need anything ;)
-		* Have a great day
+		* Ok no prob. Let me know if you need anything ;)
+		* Have a great day !
 
 [Yes]
 	* yes
