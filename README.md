@@ -5,7 +5,7 @@ Description may not reflect the actual work
 # Siribro : The Bot that looks like human
 
 
-## Intro
+## Description
 Siribro is a dialog based bot that can adapt his behavior based on the answers of the user.
 You can build a very complex dialog flow to handle many scenario or just play with a simple conversation. 
 You can run Siribro on any project even those without a server side code (like an moblie hybrid app).
@@ -16,7 +16,7 @@ Siribro has only a *jQuery* dependency. It is used for DOM control and AJAX requ
 We will try to remove this dependency in a future version.
 
 
-## Let's try !
+## Installation 
 
 1. Download [siribro.min.js](TODO).
 2. Download a sample dialog file like [bot.md](TODO)
@@ -36,7 +36,7 @@ $(function() {
 
 
 
-Now you can learn more by reading *"How to create a dialog file"*
+Now you can learn more by reading **"How to create a dialog file"**
 
 
 
@@ -91,10 +91,10 @@ For simplicity, we will only present the markdown version but you can find all d
 * [JSON format] (http://TODO)
 * [Markdown format] (http://TODO)
 
-You can dive more into a dialog file construction in How to write a dialog file
+You can dive more into a dialog file construction in **How to write a dialog file**
 
 
-## Customization
+## Documentation
 There is a lot of way to customize Siribro. Feel free to reach me at  *julien at myly.fr*
 Each section will discuss about a specific aspect.
 
@@ -162,30 +162,85 @@ There is virtually no limit in what you could do :
 The only thing to remember is to call `siribro.next();` at the end of your action to resume the discussion flow.
 
 
-## How to write a dialog file
+### How to write a dialog file
 Siribro use the concept of discussion Bloc. A bloc begin with a name and is separeted by a new line from other blocs.
+A good guideline to follow is to always write your discussion in a guided way. Don't ask open question or try to avoid questions from the user.
+If you do have user question's, you will have to face random situations that are far more complex to handle. Actually, you would probably have to write sort of machine learning algorithm.
+
+#### Answers
+A discussion is usually based on sentence, questions and answers. You can ask any question to the user and get his input with the comand :
+```markdown
+* `input()`
+```
+If you provide a parameter to the input, then Siribro will save the answer into the `siribro.answers[]` array with the name of your param as the index.
+Given the user has provided an input, then the discussion will proceed. There is one exception to that behavior : decision options (see **Decisions** section). 
 
 
-### Multiple values
+#### Decisions
+Usually a discussion is not linear. Based on the answers, you will take decision to adapt the following discussion path.
+To create a discussion branch, you will have to use an ordered list notation and indent to the right all child path like this :
+```markdown
+* `input()`
+    1. OK
+        * ...
+    2. NOT OK
+        * ...
+```
+In the `1. OK` , "OK" represent the string that will be compared to the user answer. It can be :
+* a plain string
+* multiple choice separated with a pipe `|` 
+* a regex
+* a reference to a value bloc more on that in the **Value Bloc** section
+
+If you want to take decision based on the user answer (saved or not), you can
+
+Tips : You should always ask closed questions (yes/no type or with a reduced set on possibility) if you want to achieve a smooth decision flow.
+
+#### Multiple values
 Usually, there is multiple way of saying something. So Siribro do support values lists. It's a powerfull feature that help you :
 * Propose random sentence to the user
 * Handle multiple answer in one option
 
-### Propose multiple sentence
+#### Value Bloc ( Display Random phrase or accept multiple value)
 When you want a dialog that can be replayed by the same person without noticing too much that it's not human, you can add multiple random sentence or just a part of a sentence.
 You will have to define a reference at the root of the document like this 
 
 Ex :
->	[Hello]
->		* Hello
->		* Hi
->		* Hey
+```markdown
+[Hello]
+	* Hello
+	* Hi
+	* Hey
+```
 
 Then somewhere in the discussion :
+```markdown
+* [Hello], how are you ?
+```
 
->	* 
->	* [Hello], how are you ?
 
+Same approach is used to accept a wide set of answer is just on option choice. 
+
+Let say you want to interpret *ok*, *agree* and *fine* as a "ok", you could write a value bloc
+```markdown
+[Ok]
+	* ok
+	* agree
+	* fine
+```
+
+and somewhere in a discussion bloc 
+```markdown
+#Dialog
+(...)
+* `input(reply)`
+		1. [OK]
+			* Nice, we should continue then!
+			* ...
+		2. No
+			* I'm sad
+			* ...
+```
 
 
 
