@@ -91,7 +91,7 @@ For simplicity, we will only present the markdown version but you can find all d
 * [JSON format] (http://TODO)
 * [Markdown format] (http://TODO)
 
-You can dive more into a dialog file construction in **How to write a dialog file**
+You can dive more into a dialog file construction in the **How to write a dialog file** section
 
 
 ## Documentation
@@ -101,16 +101,20 @@ Each section will discuss about one specific aspect.
 ### Start the Dialog
 To start a dialog, you will need to provide a dialog file first. You can use `load...` like this :
 ```javascript	
-siribro.loadMD("file.json");
+siribro.loadMD("file.md");
 ```
 or 
 ```javascript	
-siribro.loadJson("file.md");	
+siribro.loadJson("file.json");	
 ```
 
 Now you can start the dialog with `start()`. It takes a optional parameter to set the entry point of the discussion (the name of a dialog bloc) .
 ```javascript	
 siribro.start(); // will begin from the first dialog bloc in the file
+```
+
+```javascript	
+siribro.start("Beginning"); // will begin from the #Beginning dialog bloc 
 ```
 
 
@@ -129,6 +133,7 @@ option name | type | default value | Description
 `isPersistHistory` | boolean | `false` | when set to true, it will save the discussion for later. If the user come back, the bot will display the history.
 `typingSpeed` | integer | `20` | Number of character typed per second by the Bot 
 `readingSpeed` | integer | `50` | Number of character read per second by the Bot 
+`botface` | string | base64 | url of the picture face of the bot (32x32px) 
 
 
 
