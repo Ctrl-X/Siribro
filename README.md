@@ -91,11 +91,11 @@ You could add a custom function :
       })  
       .start("Beginning");`
       
-And now in your bot.md, you call call your custom function like this in the dialog *.md* file :
->		\* Can you provide me an email ?
->		\* \`input(email)\`
->		\* Ok, now let me check if I find your account...
->		\* \`checkOnServer()\`
+And now in your bot.md, you can call your custom function like this in the dialog *.md* file :
+>	* Can you provide me an email ?
+>	* \`input(email)\`
+>	* Ok, now let me check if I find your account...
+>	* \`checkOnServer()\`
 
 
 
@@ -117,14 +117,14 @@ You will have to define a reference at the root of the document like this
 
 Ex :
 >	[Hello]
->	\* Hello
->	\* Hi
->	\* Hey
+>		* Hello
+>		* Hi
+>		* Hey
 
 Then somewhere in the discussion :
 
->	\* 
->	\* [Hello], how are you ?
+>	* 
+>	* [Hello], how are you ?
 
 
 
@@ -132,13 +132,13 @@ Then somewhere in the discussion :
 #### Answer Management
 By default,  if the answer don't match any options, Siribro will wait until an answer that match. 
 If you want to by pass that behaavior, you can add a lat option with the value Other like this : 
->		\* Are you happy ?
->   		1. Yes
->    			\* Great !
->      		\* Let's have a beer !
->			2. No
->	 			\* Ok so why not having a beer !
->			3. Other
->				/* Well I'm confused...
+>	* Are you happy ?
+>  	1. Yes
+>    		* Great !
+>     	* Let's have a beer !
+>		2. No
+> 			* Ok so why not having a beer !
+>		3. Other
+>			* Well I'm confused...
  
 
