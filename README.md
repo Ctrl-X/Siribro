@@ -14,14 +14,14 @@ We will try to remove this dependency in a future version.
 * Download [siribro.min.js](TODO).
 * Get a sample dialog file like [simplebot.md](TODO)
 * Link the javascript to your html page :
-```html	
+```html    
 <script type="application/javascript" src="siribro.min.js"></script>
 ```
 * Call Siribro from your main function like :
-```javascript	
+```javascript    
 $(function() {
-	siribro.loadMD("simplebot.md")
-	.start();
+    siribro.loadMD("simplebot.md")
+    .start();
 });
 ```
 * Navigate to the page on your localhost server
@@ -38,36 +38,36 @@ So we focused on the human readability aspect while keeping a flexible set of ad
 A exemple is worth a thousand words, so `bot.md :` looks like :
 ```markdown
 # Beginning
-* `pause(3000)`	// Will wait for 3 seconds
+* `pause(3000)`    // Will wait for 3 seconds
 * Hello, how are you?
-* `input(mood)`		// Will save the answer into siribro.answers["mood"]
+* `input(mood)`        // Will save the answer into siribro.answers["mood"]
 * My name is Julien, I would like to introduce our products
 * Shall I continue?
-* `input()`		// Won't save the user answer
-	1.	[Yes]		// But will use it as the last answer for this choice
-		* Cool ;)
-		* We are a small company based in Montreal
-		* We sell or rent appartment downtown
-		* Where are you living?
-		* `input(city)`
-			1. Montreal | downtown
-				* Really ? that's fantastic, let's have a beer!
-				* ...
-			2. Other
-				* Oh I see. 
-				* Maybe we can stay in touch!
-				* `goto(Finish)`	// will go to the bloc called "Finish"
-	2. Other
-		* Ok no prob. Let me know if you need anything ;)
-		* `goto(Finish)`	
-		
+* `input()`        // Won't save the user answer
+    1. [Yes]        // But will use it as the last answer for this choice
+        * Cool ;)
+        * We are a small company based in Montreal
+        * We sell or rent appartment downtown
+        * Where are you living?
+        * `input(city)`
+            1. Montreal | downtown
+                * Really ? that's fantastic, let's have a beer!
+                * ...
+            2. Other
+                * Oh I see. 
+                * Maybe we can stay in touch!
+                * `goto(Finish)`    // will go to the bloc called "Finish"
+    2. Other
+        * Ok no prob. Let me know if you need anything ;)
+        * `goto(Finish)`    
+        
 # Finish
 * Have a great day !
 
 [Yes]
-	* yes
-	* sure
-	* ok
+    * yes
+    * sure
+    * ok
 ```
 
 
@@ -87,30 +87,30 @@ Each section will discuss about one specific aspect.
 
 ## Start the Dialog
 To start a dialog, you will need to provide a dialog file first. You can use `load...` like this :
-```javascript	
+```javascript    
 siribro.loadMD("file.md");
 ```
 or 
-```javascript	
-siribro.loadJSON("file.json");	
+```javascript    
+siribro.loadJSON("file.json");    
 ```
 
 Now you can start the dialog with `start()`. It takes a optional parameter to set the entry point of the discussion (the name of a dialog bloc) .
-```javascript	
+```javascript    
 siribro.start(); // will begin from the first dialog bloc in the file
 ```
 or
-```javascript	
+```javascript    
 siribro.start("Beginning"); // will begin from the #Beginning dialog bloc 
 ```
 
 
 ## Set Options to customize your setup
 Siribro have some options that you can provide to tweak the component. Just call `setOptions(...)` before your start the dialog :
-```javascript	
+```javascript    
 siribro.loadMD(...)
-	.setOptions({"isPersistHistory":false,"isLogEnabled":false})
-	.start("Beginning");
+    .setOptions({"isPersistHistory":false,"isLogEnabled":false})
+    .start("Beginning");
 ```
 
 #### Available options :  
@@ -206,13 +206,13 @@ By default, if the answer don't match any value, Siribro will wait until an answ
 If you want to by pass that behavior, you can add a last option with the value `Other`, like this : 
 ```markdown
 * Are you happy ?
-	1. Yes
-		* Great !
-		* Let's have a beer !
-	2. No
-		* Ok so why not having a beer !
-	3. Other
-		* -> This will handle any other answer
+    1. Yes
+        * Great !
+        * Let's have a beer !
+    2. No
+        * Ok so why not having a beer !
+    3. Other
+        * -> This will handle any other answer
 
 ``` 
 
@@ -228,9 +228,9 @@ You will have to define a reference at the root of the document like this
 Ex :
 ```markdown
 [Hello]
-	* Hello
-	* Hi
-	* Hey
+    * Hello
+    * Hi
+    * Hey
 ```
 
 Then somewhere in the discussion :
@@ -243,9 +243,9 @@ Same approach is used to accept a wide set of answer to take a decision.
 Let say you want to interpret **ok**, **agree** and **fine** as a *"ok"*, you could write a value bloc
 ```markdown
 [Ok]
-	* ok
-	* agree
-	* fine
+    * ok
+    * agree
+    * fine
 ```
 
 Then somewhere in a discussion bloc 
@@ -253,12 +253,12 @@ Then somewhere in a discussion bloc
 #Dialog
 (...)
 * `input(reply)`
-	1. [OK]
-		* Nice, we should continue then!
-		* ...
-	2. No
-		* I'm sad
-		* ...
+    1. [OK]
+        * Nice, we should continue then!
+        * ...
+    2. No
+        * I'm sad
+        * ...
 ```
 
 
@@ -315,21 +315,21 @@ As for sentences, Siribro can take a decision based on a custom function :
 ```markdown
 * Could you give me your age ?
 * `input(age)`
-	1. `ageBelow18()`
-		* You are too young
-	2. Other
-		* ok, next step !
+    1. `ageBelow18()`
+        * You are too young
+    2. Other
+        * ok, next step !
 ```
 
 where `ageBelow18()` is a custom function that could be :
 ```javascript
 siribro.addFunction("ageBelow18",function(){
-	if (siribro.answers["age"] < 18){
-		siribro.next(true);
-	}else
-	{
-		siribro.next(false);
-	}
+    if (siribro.answers["age"] < 18){
+        siribro.next(true);
+    }else
+    {
+        siribro.next(false);
+    }
 });
 ```
 
