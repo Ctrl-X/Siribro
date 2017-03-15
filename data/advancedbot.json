@@ -1,0 +1,199 @@
+[
+    {
+        "type":"dialog_bloc",
+        "name":"Beginning",
+        "steps":[
+            {
+                "type":"sentence",
+                "text":"[Hello]"
+            },
+            {
+                "type":"sentence",
+                "text":"Do you need some help?"
+            },
+            {
+                "type":"input",
+                "data":"needhelp"
+            },
+            {
+                "type":"optionGroup",
+                "options":[
+                    {
+                        "type":"option",
+                        "value":"[Yes]",
+                        "steps":[
+                            {
+                                "type":"sentence",
+                                "text":"Ok, I'll need your email to verify your account"
+                            },
+                            {
+                                "type":"sentence",
+                                "text":"Can I have your email ?"
+                            },
+                            {
+                                "type":"goto",
+                                "value":"CheckEmail"
+                            }
+                        ]
+                    },
+                    {
+                        "type":"option",
+                        "value":"   Other",
+                        "steps":[
+                            {
+                                "type":"sentence",
+                                "text":"Ok, let me know if you need assistance !"
+                            },
+                            {
+                                "type":"goto",
+                                "value":"Finish"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type":"dialog_bloc",
+        "name":"CheckEmail",
+        "steps":[
+            {
+                "type":"input",
+                "data":"email"
+            },
+            {
+                "type":"function",
+                "name":"checkOnServer"
+            },
+            {
+                "type":"optionGroup",
+                "options":[
+                    {
+                        "type":"option",
+                        "value":"OK",
+                        "steps":[
+                            {
+                                "type":"goto",
+                                "value":"Authenticated"
+                            }
+                        ]
+                    },
+                    {
+                        "type":"option",
+                        "value":"Other",
+                        "steps":[
+                            {
+                                "type":"sentence",
+                                "text":"[EmailNotValid]"
+                            },
+                            {
+                                "type":"sentence",
+                                "text":"Do you want to make another attempt?"
+                            },
+                            {
+                                "type":"input",
+                                "data":"retry"
+                            },
+                            {
+                                "type":"optionGroup",
+                                "options":[
+                                    {
+                                        "type":"option",
+                                        "value":"[Yes]",
+                                        "steps":[
+                                            {
+                                                "type":"sentence",
+                                                "text":"[EmailRetry]"
+                                            },
+                                            {
+                                                "type":"goto",
+                                                "value":"CheckEmail"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type":"option",
+                                        "value":"Other",
+                                        "steps":[
+                                            {
+                                                "type":"sentence",
+                                                "text":"Ok, that's fine"
+                                            },
+                                            {
+                                                "type":"goto",
+                                                "value":"Finish"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type":"dialog_bloc",
+        "name":"Authenticated",
+        "steps":[
+            {
+                "type":"sentence",
+                "text":"Perfect, I found your account!"
+            },
+            {
+                "type":"sentence",
+                "text":"How can I help you ?"
+            },
+            {
+                "type":"sentence",
+                "text":"To be continued..."
+            }
+        ]
+    },
+    {
+        "type":"dialog_bloc",
+        "name":"Finish",
+        "steps":[
+            {
+                "type":"sentence",
+                "text":"Have a great day !"
+            }
+        ]
+    },
+    {
+        "type":"value_bloc",
+        "name":"[Hello]",
+        "values":[
+            "Hello",
+            "Hi !",
+            "Morning !"
+        ]
+    },
+    {
+        "type":"value_bloc",
+        "name":"[Yes]",
+        "values":[
+            "yes",
+            "sure",
+            "ok"
+        ]
+    },
+    {
+        "type":"value_bloc",
+        "name":"[EmailNotValid]",
+        "values":[
+            "The email doesn't seems right",
+            "I can't find your email"
+        ]
+    },
+    {
+        "type":"value_bloc",
+        "name":"[EmailRetry]",
+        "values":[
+            "Ok, give me a valid email",
+            "can I have your email again?"
+        ]
+    }
+]

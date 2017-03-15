@@ -47,11 +47,17 @@
   var thinkingTimerId;
   var typingTimerId;
   var needScrollAtBottomBeforeAppending;
-
+  
+  
+  var lastUserInput;
+  var optionGroupOffset;
+  
   /**
    * Custom Code param
    */
   var customFunctionList;
+  
+  
   
   function init() {
 
@@ -59,11 +65,15 @@
             isLogEnabled : true, /* By default, we enable debugging to console  */
             isPersistHistory : false, /* By default, we don't persist  */
             typingSpeed : 20, /* Number of character typed per second */
-            readingSpeed : 50  /* Number of character read per second by the Bot */
+            readingSpeed : 50,  /* Number of character read per second by the Bot */
+            botface : "data:image/png;base64,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"
     };
+    
+    
+    generateCSS();
+    generateHtml();
 
-
-    replyTemplate = $('[data-id="messageBloc"]');
+    replyTemplate = $('<div class="message" data-id="messageBloc"><table cellpadding="0" cellspacing="0" border="0"><tr><td><div class="portrait"></div></td><td><div class="sentence" data-id="sentenceZone"><div data-id="phraseZone"></div><div class="interphrase"></div></div></td></tr></table></div>');
     inputZone = $('[data-id="inputZone"]');
     flowZone = $('[data-id="flowZone"]');
     chatZone = $('[data-id="chatZone"]');
@@ -80,6 +90,8 @@
     isInitialized = false;
     currentConversationBloc = null;
     currentConversationStep = null;
+    lastUserInput = null;
+    optionGroupOffset = 0;
 
 
     needScrollAtBottomBeforeAppending = true;
@@ -105,13 +117,40 @@
         siribro.options = options;
 
       }catch(ex){
-        log("ERROR : Unable to set options. Reason : "+ ex.message)
+        log("ERROR : Unable to set options. Reason : ", ex.message)
       }
     }
 
     return this;
   }
 
+  
+  function generateCSS(){
+    // Append CSS Style
+    $("<style>")
+    .prop("type", "text/css")
+    .html("#chatContainer{margin:50px 0 0;bottom:10px;right:20px;position:fixed}#chatContainer .clear{clear:both}#chatContainer table,td,tr{margin:0;padding:0}#chatContainer button:focus,#chatContainer input:focus{outline:0}#chatContainer .message{padding:5px 10px 3px 5px}#chatContainer .message table{width:100%}#chatContainer .message table td:first-of-type{width:44px;vertical-align:bottom}#chatContainer .sentence div:first-child{padding:2px 7px;font-family:Helvetica,Arial,sans-serif;font-size:12px;line-height:16px;word-wrap:break-word}#chatContainer .interphrase{clear:both;margin-top:1px;height:1px}#chatContainer .portrait{background-size:contain;width:32px;height:32px;border-radius:10px;overflow:hidden;margin-right:10px}#chatContainer .fromBot{text-align:left}#chatContainer .fromBot .portrait{background-size:contain;margin-bottom:10px}#chatContainer .fromBot .sentence div:first-child{background:#e6e6e6;color:#000;float:left}#chatContainer .fromUser{text-align:right}#chatContainer .fromUser .sentence div:first-child{background:#4080ff;color:#fff;float:right}#chatContainer .fromHistory{opacity:.8}#chatContainer .fromSystem{text-align:center;font-size:12px;font-family:sans-serif;color:#555;font-weight:200}#chatContainer .chatZone{overflow:hidden;width:260px;margin:auto;border:1px solid #d6d6d6}#chatContainer .textZoneContainer{position:relative;height:300px;overflow:none}#chatContainer .textZoneContainer .textZone{position:absolute;width:100%;bottom:0;max-height:300px;overflow:auto}#chatContainer .sentence:first-child div:first-child{border-top-left-radius:8px;border-top-right-radius:8px}#chatContainer .sentence:last-child div:first-child{border-bottom-left-radius:8px;border-bottom-right-radius:8px;margin-bottom:5px}#chatContainer .fromBot .sentence div:first-child{border-top-right-radius:8px;border-bottom-right-radius:8px}#chatContainer .fromUser .sentence div:first-child{border-top-left-radius:8px;border-bottom-left-radius:8px}#chatContainer .message.typing{margin-top:0}#chatContainer .typing .sentence div:first-child{background-image:url(data:image/gif;base64,R0lGODlhTQAmAPf/AObm6ujo6q6tsuXk6eXk7auqrZiXmo+OkKalqe7t8/Dv9fLx9/n4/p+eor++w+Pi6Ojn64WEh6Cfo+rp8L28wZuanvj3/uDf5fj3/Pf2/K+us+bm5ejo6MHAxerq69LR1tDP1KCgoJ6enYaFiLq7v+Xl5qGgpLm4vYqJjZSTlvPy95ubm7OytsC/xKOipqmoq/b1+7e2u7i3vNfW3KKhpeTl5Lq5v+Lg6Nzb4Pb0/JaVmfTz+szL0ZCPk6Ojo4KBhNnY3srJzoyLj+bl57KxttTT2JOSlc/O08/O1MrJ0KampsbFyp6dooiHibe2vLW0uff2+/Hx9Ozr8+Tj5ZGQlMjHzI2MjcPCx4qKi7u6v5mYnJOTk5GRkY+PjoOChebl7ebm5+bl7Obl6uXk6uTj6ebm6Ofm7Ofn5+bl6ebl7uzr8e/u9L69wuvq8OTj6Orp7+bm6ejn7e3s8vPy+OXk6+Tj6uno7u3s8/Hw9vX0+u7t9Obl6PPy+erp7vHw9/Tz+ZeWmufn6KSjp7y7wOvq77Gwtebk7pGQk+jn7PX0++vq8ePi5+jn7uHg5fDv9rq5veLh59va37a1upeWmZ6doefm7efm6o2Mj5KRleno79fW2+bk7JqZncnIzeHg5+bk7+/u9ZWUmMvKz8PCyO3s8dbV2pybnqOipd7d4trZ3+vq8uPj4rOyuJiXm5OSl+3s9JyboNva4JeXlt/e5Obk7fLx+LSzuObn5ufn5ufl7bKxtb69waGgo+fn6eno7aSjqKinq+Xl6sLBxs7N0uTk4+Xl7OXm5ZiYl4+Qj728wuXj6efn7by7vvLy8rm4vpiWmOLh5eXk7uPj5KKhpu/u8/X0+ebk8fHw+IKCgefm6LW0ura1ube2uZ2coJCPj9jX3J+eodXU1/Pz+MHAw5STkpqZnpuanZSUk8LBxObl78nIzp+fn8rKzfX0/JGRju3t86uqr+vp8KyrsNTT1+np7unp783M0c3M0peYl87N0c7O0dXU2tbW2ebl6+bm5v///yH/C05FVFNDQVBFMi4wAwEAAAAh/wtYTVAgRGF0YVhNUDw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0iMUNENjk1N0QxRDk5RjZCMkY1RDgyNzhCQjg0MEY4ODYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6ODEzQTk3QjUyMEI5MTFFMzkxMTdEODlGMTI5NTlCRTEiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6ODEzQTk3QjQyMEI5MTFFMzkxMTdEODlGMTI5NTlCRTEiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjBBNkQ1QkI4RDUyMzY4MTE4MjJBRjRCMjFGNkM5RDdGIiBzdFJlZjpkb2N1bWVudElEPSIxQ0Q2OTU3RDFEOTlGNkIyRjVEODI3OEJCODQwRjg4NiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgH//v38+/r5+Pf29fTz8vHw7+7t7Ovq6ejn5uXk4+Lh4N/e3dzb2tnY19bV1NPS0dDPzs3My8rJyMfGxcTDwsHAv769vLu6ubi3trW0s7KxsK+urayrqqmop6alpKOioaCfnp2cm5qZmJeWlZSTkpGQj46NjIuKiYiHhoWEg4KBgH9+fXx7enl4d3Z1dHNycXBvbm1sa2pp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);background-size:contain;width:27px}#chatContainer .inputArea{border-top:1px solid #e6e6e6;padding:5px 5px 2px 10px}#chatContainer .inputArea input{border:0;width:100%;height:24px;font-family:Helvetica,Arial,sans-serif;font-size:12px}")
+    .appendTo("head");
+    
+  }
+    
+  
+  function generateHtml(){
+    // HTML chat Container
+    $("body").append('<div id="chatContainer" style="display:none" class="close"> \
+        <form data-id="chatZone"> \
+          <div class="chatZone">  \
+              <div class="textZoneContainer"> \
+                  <div data-id="flowZone" class="textZone"><!-- Here come new text --></div> \
+              </div>  \
+              <div class="inputArea"> \
+                  <input type="text" placeholder="Type a message" data-id="inputZone">  \
+                  <input type="submit" value="Send" style="display:none"/>  \
+              </div>  \
+            </div>  \
+         </form> \
+      </div>');
+  }
 
   function loadingStop() {
     onAjaxStopCallbacks.forEach(function (callbackFunction) {
@@ -121,30 +160,19 @@
     onAjaxStopCallbacks = [];
   }
 
-
-  function loadJson(jsonUrl) {
-
-    $.ajax({
-      url: jsonUrl,
-      beforeSend: function (xhr) {
-        xhr.overrideMimeType("application/json; charset=utf-8");
-      },
-      complete: function (jqXHR, status) {
-        if (status != "success") {
-          throw "Ajax call failed : " + status;
-        }
-        isInitialized = true;
-
-      }
-    }).done(function (data) {
-
-      if (data != null && data.length > 0) {
-        conversationalJson = data;
-      }
-    });
+  
+  
+  function loadJSON(jsonUrl) {
+    loadAndParseFile(jsonUrl,"application/json");
     return this;
   }
-
+  
+  function loadMD(mdUrl){
+    loadAndParseFile(mdUrl,"text/markdown");
+    return this;
+  }
+  
+  
 
   function start(blocName) {
 
@@ -162,7 +190,7 @@
         siribro.answers = useranswers;
         options.isHistoryLoaded = true;
       }else{
-        log("ERROR : Unable the set isPersistHistory to true. Reason : you need to include the cookie management library ( https://github.com/js-cookie/js-cookie )")
+        log("ERROR : Unable the set isPersistHistory to true. Reason : you need to include the cookie management library", "https://github.com/js-cookie/js-cookie ")
         options.isPersistHistory = false;
       }
     }
@@ -174,8 +202,12 @@
         start(blocName);
       });
       return;
+    }else{
+      //We can display the chat window
+      $("#chatContainer").show()
+              .removeClass('close')
+              .addClass('open');
     }
-
 
     if (conversationalJson != null) {
       if (discussionHistory.length == 0) {
@@ -187,7 +219,7 @@
       }
 
     } else {
-      throw "Please load a valid JSON before calling .start(...)";
+      throw "Please load a valid Markdown or JSON before calling .start(...)";
     }
   }
 
@@ -221,8 +253,7 @@
         computeInput(step);
         break;
       case "optionGroup":
-        // TODO : Deal with optionGroup when not after an Input
-        log("ERROR : You can't have an option list without getting an input first")
+        computeOptionGroup(step);
         break;
       case "goto":
         // We need to jump to a different
@@ -245,7 +276,7 @@
 
     // We must animate the writing phase
     // We consider X characters per second
-    var textPhraseToWrite = getSentenceTextFromStep(step);
+    var textPhraseToWrite = getSentenceFromText(step["text"]);
     var textLengthToWrite = $("<div/>").append(textPhraseToWrite).text().length;
     var typingDuration = textLengthToWrite / (options.typingSpeed + (Math.random() * 2 * variance - variance));
 
@@ -291,14 +322,43 @@
     thinkingDuration * 1000);
   }
 
-  function getSentenceTextFromStep(step){
-    // We are looking for optional string (pipes)
-    var textArray = step["text"].split("|");
-
+  
+  
+  
+  function getSentenceFromText(text){
+    if(!text)
+      return "";
+    
+   
+    // We parse some potential dynamic value
+    var regexp = new RegExp(/(\[\w{2,}\])+/,"gi");
+    var result = text.replace(regexp,function(match,offset,string){
+      var valueList = getValueListFromText(match);
+      var selectedIndex = Math.floor(Math.random() * valueList.length);
+      return valueList[selectedIndex];
+    });
+    
+    var textArray = result.split("|");
     var selectedIndex = Math.floor(Math.random() * textArray.length);
 
     return $.trim(textArray[selectedIndex]);
   }
+  
+  
+  function getValueListFromText(text){
+    var result = [];
+    
+    var node = findFirstLevelNodeWithName("value_bloc",text);
+    if(node){
+      var values = node["values"];
+      if(isArray(values)){
+        result = values;
+      }
+    }
+    
+    return result;
+  }
+  
 
   function startTypingEffect() {
     needScrollAtBottomBeforeAppending = isScrollBarAtBottom();
@@ -308,6 +368,9 @@
     .addClass("typing")
     .addClass("fromBot");
 
+    var urlString = "url('" + options.botface + "')";
+    messageElement.find(".portrait").css("background-image",urlString);
+  
 
     messageElement.find('[data-id="phraseZone"]').html("&nbsp");
     flowZone.append(messageElement);
@@ -346,7 +409,7 @@
           messageElement = replyTemplate.clone().addClass("fromBot");
           flowZone.append(messageElement);
         }
-      }
+     }
       break;
     case "User":
       // USER sentence
@@ -443,44 +506,22 @@
     if(userInput.length == 0)
       return;
 
-    inputZone.val('');
-    log("Value :", userInput);
-    printSentence(userInput, "User");
-
-    var isAnswerHandled = false;
+    lastUserInput = userInput;
+    inputZone.val('');  //Clear the input
+    log("Value :", lastUserInput);
+    printSentence(lastUserInput, "User");
 
     if (currentConversationStep != null && currentConversationStep["type"] == "input") {
       var dataName = currentConversationStep["data"];
-      if (dataName != null){
-        useranswers[dataName] = userInput;
+      if (dataName){
+        useranswers[dataName] = lastUserInput;
         siribro.answers = useranswers;
         if(options.isPersistHistory)
           Cookies.set("answers", useranswers);
-
       }
-
-      var nextStep = findNextStep(currentConversationBloc, currentConversationStep);
-      if (nextStep != null) {
-        switch (nextStep["type"]) {
-        case "optionGroup" :
-          nextStep = getStepFromOptionGroup(nextStep, userInput);
-          break;
-        }
-      }
-
-      if (nextStep != null) {
-        //If we have a next Step to go with that answer, we launch it
-        isAnswerHandled = true;
-        gotoNextStep(nextStep);
-      }
+      
+      gotoNextStep();
     }
-
-    if (!isAnswerHandled) {
-      //TODO We need to take a decision on what to do with the answer
-      // Like by inserting a step into the conversation flow if we can handle the reply
-
-    }
-
   }
   
   
@@ -493,11 +534,10 @@
     var blocName = step["value"];
     if(blocName != null)
       gotoBloc(blocName);
-    
   }
   
   function gotoBloc(blocName){
-    currentConversationBloc = findBlocsWithLabel(conversationalJson, blocName);
+    currentConversationBloc = findFirstLevelNodeWithName("dialog_bloc", blocName);
     currentConversationStep = null;
     gotoNextStep();
   }
@@ -508,42 +548,8 @@
    */
   function computeCustomFunction(step){
     var funcName = step["name"];
-    /*
-    var params = step["params"];
-    
-    var paramList = [];
-    
-    if(isArray(params)){
-      for (var i = 0; i < params.length; i++) {
-        var param = params[i];
-        var rawValue = param["value"];
-        var value = null;
-        switch (param["type"]){
-          case "string":
-            value = rawValue;
-            break;
-          case "variable":
-            value = useranswers[rawValue];
-            break;
-        }
-
-        if(value){
-          value = '"' + value + '"';
-          paramList.push(value);
-        }
-      } 
-    }
-    
-    var toExecute = "siribro.customFunctionList." + funcName + "(" + paramList.join(",") + ",siribro.gotoNextStep)";
-   try{
-     if(eval(toExecute) === true){
-       gotoNextStep();
-     }
-   }catch(ex){
-     log("ERROR: Issue when executing custom function. Reason :" + ex.message);
-   }*/
-   customFunctionList[funcName]();
-    
+    // We call the custom function
+    customFunctionList[funcName]();
   }
   
   function addFunction(name,func){
@@ -551,77 +557,140 @@
     return this;
   }
   
+  function nextFromFunction(customFunctionOutput){
+    
+    if (currentConversationStep != null){
+      if (currentConversationStep["type"] == "function") {
+        var nextStep = findNextStep(currentConversationBloc, currentConversationStep);
+        if (nextStep != null) {
+          switch (nextStep["type"]) {
+            case "optionGroup" :
+              nextStep = getStepFromOptionGroup(nextStep, customFunctionOutput);
+              break;
+          }
+        }
+        gotoNextStep(nextStep);
+        
+      }else if (currentConversationStep["type"] == "optionGroup") {
+        //The function was called from an optiongroup
+        if(customFunctionOutput){
+          //if the output is TRUE we take the first step of this option
+          var options = currentConversationStep["options"];
+          var option = options[optionGroupOffset];
+          var step = getFirstOptionStep(option);
+          gotoNextStep(step);
+        }else{
+          // if the output is false, we move on to the next option
+          optionGroupOffset = optionGroupOffset + 1;
+          computeOptionGroup(currentConversationStep);
+        }
+        
+      }
+    }
+  }
+    
   
-
-
   /**
    * OPTIONGROUP STEP Methods
    *
    */
+  function computeOptionGroup(step) {
+    log("====OptionGroup===== ");
+    log("Choose an Option with last user input : " , lastUserInput) 
+    var nextStep = getStepFromOptionGroup(step, lastUserInput);
+    if(nextStep != step)
+      gotoNextStep(nextStep); // We go to next step only if it's a different step ( used for dynamic function callback)
+  }
+  
 
   function getStepFromOptionGroup(optionGroup, inputString) {
+    
     var options = optionGroup["options"];
     var foundOption = null;
     var step = null;
-    if (options != null) {
-      for (var i = 0; i < options.length && foundOption == null; i++) {
-        // For each option we take the values array
+    if (isArray(options)) {
+      for (var i = optionGroupOffset; i < options.length && foundOption == null; i++) {
+        // For each option we take the value
         var option = options[i];
-        var optionValues = option["values"];
-        if (optionValues != null) {
-          for (var j = 0; j < optionValues.length && foundOption == null; j++) {
-            // For each value, we will compare it to the input
-            var optionValue = optionValues[j];
-            if(isSelectedOptionValue(optionValue,inputString)){
-              foundOption = option;
-            }
-          }
+        var optionType = option["type"];
+        var optionValue = option["value"];
+        if(optionType == "function"){
+          optionGroupOffset = i;
+          computeCustomFunction(option);
+          return optionGroup; //we need to wait the callback from the function so we return the current step
+        }else if(isSelectedOptionValue(optionValue,inputString)){
+          foundOption = option;
         }
       }
     }
 
-    if(foundOption != null){
-      //We take the first step of the founded option
-      var steps = foundOption["steps"];
-      if(isArray(steps) && steps.length > 0){
-        step = steps[0];
+    if(foundOption == null){
+      //No valid option : We take the last options if it's a "other" option
+      if(isArray(options) && options.length > 0){
+        var otherOption = options[options.length-1];
+        var otherOptionValue = otherOption["value"];
+        if(otherOptionValue && otherOptionValue.toLowerCase() == "other"){
+          foundOption = otherOption;
+        }
       }
     }
+      
+    // We take the first step of the founded option
+    if(foundOption != null){
+      step = getFirstOptionStep(foundOption);
+    }else{
+      
+      //If the previous step is an input step, we go back to that step until we have the right answer
+      var previousStep = findPreviousStep(currentConversationBloc, optionGroup);
+      if (previousStep && previousStep["type"] == "input") {
+        step = previousStep; // We go one step back
+      }
+        
+    }
 
+    optionGroupOffset = 0;
+    return step;
+  }
+  function getFirstOptionStep(option){
+    var step = null;
+    var steps = option["steps"];
+    if(isArray(steps) && steps.length > 0){
+      step = steps[0];
+    }
     return step;
   }
 
-  function isSelectedOptionValue(optionValue,inputString){
-    var type = "string";
-    var value = "";
-    if(optionValue["type"] != null)
-      type = optionValue["type"];
-    if(optionValue["value"] != null)
-      value = optionValue["value"];
-
+  function isSelectedOptionValue(value,inputString){
+    if(!value)
+      return null;
+    
+    value = $.trim(value);
+    
+    // We parse some potential dynamic value
+    var regexp = new RegExp(/(\[\w{2,}\])+/,"gi");
+    value = value.replace(regexp,function(match,offset,string){
+      //We have the list of values, we simplify them
+      var valueList = getValueListFromText(match);
+      for(var i=0 ; i < valueList.length ; i++){
+        var rawValue = simplifyString(valueList[i]);
+        valueList[i] = rawValue.replace(new RegExp(/\s/,"gi"), '\\s?');
+      }
+      return valueList.join('|');
+    });
+    
+    // we add word boundary \b to detection so we take only full word and not part of word.
+    value = "\\b("+value+")\\b";
+    
     inputString = simplifyString(inputString);
-
-
-    switch (type){
-    case "code":
-      // We interpret the code provided
-      // TODO : We could make a nicer way to handle code
-      return eval(value);
-      break;
-    case "regex":
-      var regexp = new RegExp(value,"gi");
-      if(inputString.match(regexp) != null)
-        return true;
-      break;
-    default:
-      value = simplifyString(value);
-    return value == inputString;
-    break;
-
-    }
-    return false;
+    
+    var regexp = new RegExp(value,"gi");
+    if(inputString.match(regexp) != null)
+      return true;
+    else
+      return false;
   }
 
+  
   function simplifyString(inputString){
     var out = inputString;
     if(out != null){
@@ -682,15 +751,21 @@
    */
 
 
-  function findBlocsWithLabel(root, label) {
+  /**
+   * Get forst level node ot the traversal tree
+   */
+  function findFirstLevelNodeWithName(type, name) {
+    
+    var root = conversationalJson;
     
     var blocFound = null;
     
     if(isArray(root)){
       for (var i = 0; i < root.length; i++) {
         var elt = root[i];
-        if(elt["type"] == "bloc"){
-          if( (typeof(label) == 'undefined') || elt["label"] == label){
+        var eltType = elt["type"] ? elt["type"].toLowerCase() : "";
+        if(eltType == type.toLowerCase()){
+          if( (typeof(name) == 'undefined') || elt["name"] == name){
             blocFound = elt;
             break;
           }
@@ -699,6 +774,9 @@
     }
     return blocFound;
   }
+  
+ 
+
 
   function findNextStep(node, step) {
     var nextStep = null;
@@ -741,13 +819,305 @@
             }
           }
         }
-
       }
     }
-
     return nextStep;
   }
+  
+  function findPreviousStep(node, step) {
+    var previousStep = null;
+    if (node != null) {
+      if (step == null) {
+        // We take the first step of the currentbloc
+        if (isArray(node["steps"]) && node["steps"].length > 0) {
+          previousStep = currentConversationBloc["steps"][0];
+        }
+      } else {
+        //We search the current step in each "steps" arrays
+        if (isArray(node)) {
+          for (var i = 0; i < node.length; i++) {
+            if (node[i] === step) {
+              if (i - 1 > 0) {
+                previousStep = node[i - 1];
+              } else {
+                previousStep = -1;
+              }
+              break;
+            } else {
+              previousStep = findPreviousStep(node[i], step);
+              if (previousStep != null) {
+                if (previousStep == -1 && isArray(node["steps"])) {
+                  // We have found the step in a lower level
+                  if (i - 1 > 0)
+                    previousStep = node[i - 1];
+                }
+                break;
+              }
+            }
+          }
 
+        } else if ((typeof node === 'object') && (node !== null)) {
+          for (var key in node) {
+            if (node.hasOwnProperty(key)) {
+              previousStep = findPreviousStep(node[key], step);
+              if (previousStep != null)
+                return previousStep;
+            }
+          }
+        }
+      }
+    }
+    return previousStep;
+  }
+  
+
+  /**
+   * Markdown parsing Methods
+   */
+  
+  function loadAndParseFile(fileUrl,fileType){
+    $.ajax({
+      url: fileUrl,
+      beforeSend: function (xhr) {
+        xhr.overrideMimeType(fileType + "; charset=utf-8");
+      },
+      complete: function (jqXHR, status) {
+        if (status != "success") {
+          throw "Ajax call failed : " + status;
+        }
+        isInitialized = true;
+      }
+    }).done(function (data) {
+      if (data != null && data.length > 0) {
+        if( fileType == "application/json"){
+          conversationalJson = data;
+        }else if( fileType == "text/markdown"){
+          conversationalJson = markDownToJSON(data);;
+          
+        }
+      }
+    });
+  }
+  
+  
+  function markDownToJSON(markdownString){
+    var json = null;
+    
+    const linePattern = new RegExp(/^.*$/,"gm");  // Anything that ends with a newline
+    const emptyLinePattern = new RegExp(/^\s*$/,"g");   // ex :    
+    const singleLineCommentPattern = new RegExp(/[^.]?\/\/.*$/,"gm");  // ex : //
+    const multiLineCommentPattern = new RegExp(/[^.]?\/\*[^*]*\*+(?:[^\/*][^*]*\*+)*\//,"g");  // ex : /*  this is a comment */
+    
+    if(markdownString){
+      json = [];
+      
+      //We trim comments from the document
+      markdownString = markdownString.replace(singleLineCommentPattern, '')
+                                    .replace(multiLineCommentPattern, '');
+      
+      // Replace \t with four space
+      markdownString = markdownString.replace(/\t/g,'    '); 
+      
+      //We split lines
+      var lines = markdownString.match(linePattern);
+      lines.push(""); // We add an empty line at the end
+      
+      // bloc : multiline text. Each bloc are separated from each other by at least one empty line
+      var blocs = [];  // will contain a list of bloc
+      var currentBloc = [];
+      
+      // We match the line against empty patterns to find blocs
+      for(var i=0; i < lines.length;i++){
+        var line = lines[i];
+        if(emptyLinePattern.test(line)){
+          // EMPTY LINE : if there is a bloc, we add it to the list of blocks
+          if(currentBloc.length > 0){
+            blocs.push(currentBloc);
+            currentBloc = [];
+          }
+        }else
+          currentBloc.push(line);
+      }
+      
+      // We transform each block into a json object
+      for(var i=0; i < blocs.length;i++){
+        var jsonBlock = buildBloc(blocs[i]);
+          if(jsonBlock)
+            json.push(jsonBlock);
+      }
+    }
+    
+    return json;
+  }
+  
+  
+  function buildBloc(lines){
+    const dialogBlocPattern = new RegExp(/^#\s(\w+)\s*$/,"g");  //  ex : # FirstTime  
+    const valueListPattern = new RegExp(/^(\[\w+\])\s*$/,""); //  ex : [Yes]  
+    const valuePattern = new RegExp(/\s*\*\s(.+)/,"");
+    
+    var blockHeader = lines.shift();
+    var jsonBlock = null;
+    var matchArray = null;
+    var childs = [];
+    // There is two type of blocs : Dialog bloc and ValueBloc
+    if(matchArray = dialogBlocPattern.exec(blockHeader)){
+      childs = buildChilds(lines,0);
+      jsonBlock = {
+              "type": "dialog_bloc",
+              "name": matchArray[1] ,
+              "steps": childs
+      };
+    }else if(matchArray = valueListPattern.exec(blockHeader)){
+      // We need to get every value after and put then in the values list
+      var value = null;
+      for(var j=0;j < lines.length;j++){
+        if(value = valuePattern.exec(lines[j])){
+          childs.push($.trim(value[1]));  
+          
+        }
+      }
+      jsonBlock = {
+              "type": "value_bloc",
+              "name": matchArray[1] ,
+              "values": childs
+      };
+    }
+
+    return jsonBlock;
+  }
+  
+  
+  function buildChilds(lines, currentIndentation){
+    var childs = [];
+    const leadingPattern = new RegExp(/^(\s*)/,""); // Anything that begin with a space or \t
+    const sentencePattern = new RegExp(/\s*\*\s(.+)$/,"");      // ex : * Hi, how are you ?
+    const functionPattern = new RegExp(/^\s*\*\s`\s*(.+)\((\w*)\)\s*`\s*$/,"");   //ex : * `input(firstTime)` 
+    const optionListPattern = new RegExp(/^\s*\d{1,}\.\s(.+)$/,"");   // ex :     1. Yes it's Ok              
+    
+    
+    var obj = {};
+    while (lines.length > 0){
+      var line = lines[0];
+      
+      var leadingSpace = leadingPattern.exec(line);
+      var leadingSpaceCount = leadingSpace[0].length;
+      
+      if(leadingSpaceCount < currentIndentation){
+        break; // This line is at least 1 level above, so we exit the loop
+      }
+      
+      //As we will process this line, we can  remove it safely from the line array
+      lines.shift();
+      
+      
+      var matchArray = null; // RegExp.exec will parse the expression and return the matching groups when exist
+      if(matchArray = functionPattern.exec(line)){
+        obj = buildFunctionObj(matchArray);
+        if(obj){
+          childs.push(obj);        
+        }
+      }else if(matchArray = sentencePattern.exec(line)){
+        obj = buildSentenceObj(matchArray);
+        if(obj){
+          childs.push(obj);        
+        }
+      }else if(matchArray = optionListPattern.exec(line)){
+        if(obj.type != "optionGroup"){
+          //We create the root optionGroup
+          obj = buildOptionGroupObj();
+          if(obj){
+            childs.push(obj);        
+          }
+        }
+        // We are already in an optionGroup, we add this option
+        var option = buildOptionObj(matchArray,lines,leadingSpaceCount);
+        if(option)
+          obj.options.push(option);
+        
+       }else{
+        obj = null;
+      }
+    }
+    
+    return childs;
+  }
+  
+  function buildOptionGroupObj(){
+    // We build an optionGroup
+    var obj = {
+            "type" : "optionGroup",
+            "options" : []
+    }
+    return obj;
+  }
+  
+  function buildOptionObj(dataArray,lines,leadingSpaceCount){
+    var option = null;
+    // build an option from dataArray
+    if(isArray(dataArray) && dataArray.length > 0){
+      var steps = buildChilds(lines,leadingSpaceCount+1);
+      option = {
+              "type" : "option",
+              "value" : dataArray[1],
+              "steps" : steps
+      };
+    }
+    return option;
+  }
+    
+  
+  function buildSentenceObj(dataArray){
+    // build a sentence line from a dataArray
+    var obj = null
+    if(isArray(dataArray) && dataArray.length > 0){
+      obj = {
+            "type" : "sentence",
+            "text" : $.trim(dataArray[1])
+       }
+    }
+    return obj;
+  }
+  
+  function buildFunctionObj(dataArray){
+ // build a function line from a dataArray
+    var obj = null;
+    if(isArray(dataArray) && dataArray.length > 0){ 
+        var functionName = dataArray[1];
+        var param = dataArray.length > 2 ? $.trim(dataArray[2]) : null;
+        switch(functionName){
+        case "input" :
+          obj = {
+                "type" : "input",
+                "data" : param
+           };
+          break;
+        case "goto" :
+          obj = {
+                "type" : "goto",
+                "value" : param
+           };
+          break;
+        case "pause" : 
+          obj = {
+                "type" : "pause",
+                "millisecond" : param
+           };
+          break;
+        default :
+          // unknown function (Custom function)
+          obj = {
+                "type" : "function",
+                "name" : functionName
+           };
+        }
+    }
+    return obj;
+  }
+  
+  
+  
+  
 
   function isArray(o) {
     return Object.prototype.toString.call(o) === '[object Array]';
@@ -780,30 +1150,9 @@
     return isBottom;
   }
 
-
-  function test() {
-    var step={
-            "type": "sentence",
-            "text": "Bonjour | Salut "
-    };
-    var bonjour=0;
-    var salut=0;
-    for (var i = 0; i < 10000; i++) {
-
-      var value = getSentenceTextFromStep(step);
-      if(value == "Bonjour"){
-        bonjour++;
-      }else
-        salut++;
-    }
-    log("bonjour : ",bonjour);
-    log("salut : ",salut);
-  }
-
   function removeSpecialCharacters(str) {
-
     var defaultDiacriticsRemovalMap = [
-                                       /*  this is for uppercase letter, which we don't have here
+            /*  this is for uppercase letter, which we don't have here
             {"base":"A", "letters":/[\u0041\u24B6\uFF21\u00C0\u00C1\u00C2\u1EA6\u1EA4\u1EAA\u1EA8\u00C3\u0100\u0102\u1EB0\u1EAE\u1EB4\u1EB2\u0226\u01E0\u00C4\u01DE\u1EA2\u00C5\u01FA\u01CD\u0200\u0202\u1EA0\u1EAC\u1EB6\u1E00\u0104\u023A\u2C6F]/g},
             {"base":"AA","letters":/[\uA732]/g},
             {"base":"AE","letters":/[\u00C6\u01FC\u01E2]/g},
@@ -902,24 +1251,33 @@
 
   function log(message, value){
     if(options.isLogEnabled && console){
-      console.log(message,value);
+      if(value)
+        console.log(message,value);
+      else
+        console.log(message);
     }
   }
+  
+  function getConversationAsJson(){
+    if(conversationalJson)
+      return JSON.stringify(conversationalJson);
+  }
+  
+  
 
   
-  expose.loadJson = loadJson;
+  expose.loadJSON = loadJSON;
+  expose.loadMD = loadMD;
   expose.setOptions = setOptions;
   expose.start = start;
   expose.addFunction = addFunction;
-  expose.next = gotoNextStep;
+  expose.next = nextFromFunction;
+  expose.getConversationAsJson = getConversationAsJson;
   
   expose.answers = {};
   expose.options = {};
 
   init();
-
-  //methode de test
-  expose.test = test;
 
 })(function () {
   window.siribro = {};

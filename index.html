@@ -1,71 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+ 
     <link rel="stylesheet" type="text/css" href="css/siribro.css"/>
+    
     <meta charset="UTF-8">
     <title>Siribro</title>
 
 </head>
 <body>
-
-
-
-<div style="display: none">
-
-    <div class="message" data-id="messageBloc">
-        <table cellpadding="0" cellspacing="0" border="0">
-            <tr>
-                <td>
-                    <div class="portrait"></div>
-                </td>
-                <td>
-                    <div class="sentence" data-id="sentenceZone">
-                        <div data-id="phraseZone"></div>
-                        <div class="interphrase"></div>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-
-</div>
-
-
-<div class="chatContainer">
-    <form method="post" action="index.html" data-id="chatZone">
-        <div class="chatZone">
-            <div class="textZoneContainer">
-                <div data-id="flowZone" class="textZone">
-                    <!-- Here come new text -->
-
-                </div>
-
-            </div>
-
-            <!-- BEGIN INPUT AREA
-            Used to put the chat input zone -->
-            <div class="inputArea">
-                <input type="text" placeholder="Type a message" data-id="inputZone">
-                <input type="submit" value="Envoyer" style="display:none"/>
-            </div>
-            <!-- END INPUT AREA -->
-
-        </div>
-
-    </form>
-</div>
+This is your body !
 
 <script
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
-
+  
 <script type="application/javascript" src="js/siribro.js"></script>
+
 <script type="application/javascript">
 $(function() {
-
-  siribro.loadJson("data/bot.json").setOptions({"isPersistHistory":false})
+  siribro.loadMD("data/simplebot.md")
+    .setOptions({"isPersistHistory":false})
     .addFunction("checkOnServer",function(){
       $.ajax({
         method: "POST",
@@ -73,11 +29,17 @@ $(function() {
         data: { email: siribro.answers["email"] }
         })
         .done(function( msg ) {
-          if(msg == "OK")
-            siribro.next(); // Resume the discussion flow
+          siribro.next(msg); // Resume the discussion flow and provide a param for the next step (if needed)
         });
-    })  
-    .start("FuncTest");
+    }).addFunction("ageBelow18",function(){
+      if (siribro.answers["age"] < 18){
+        siribro.next(true);
+      }else
+      {
+          siribro.next(false);
+      }
+    })
+    .start("Beginning");
 });
 </script>
 </body>
