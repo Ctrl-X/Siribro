@@ -64,6 +64,7 @@ A exemple is worth a thousand words, so `bot.md :` looks like :
 # Finish
 * Have a great day !
 
+// Value list to handle multiple answer or sentence
 [Yes]
     * yes
     * sure
