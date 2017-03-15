@@ -1,7 +1,3 @@
-Work in Progress... 
-Unstable version...
-Description may not reflect the actual work
-
 # Siribro.js : The Bot that looks like human
 Siribro is a dialog based bot in javascript that can adapt his behavior based on the answers of the user.
 You can build a very complex dialog flow to handle many scenario or just play with a simple conversation. 
@@ -16,7 +12,7 @@ We will try to remove this dependency in a future version.
 # Installation 
 
 * Download [siribro.min.js](TODO).
-* Get a sample dialog file like [bot.md](TODO)
+* Get a sample dialog file like [simplebot.md](TODO)
 * Link the javascript to your html page :
 ```html	
 <script type="application/javascript" src="siribro.min.js"></script>
@@ -24,7 +20,7 @@ We will try to remove this dependency in a future version.
 * Call Siribro from your main function like :
 ```javascript	
 $(function() {
-	siribro.loadMD("bot.md")
+	siribro.loadMD("simplebot.md")
 	.start();
 });
 ```
@@ -41,14 +37,14 @@ When we developed Siribro, we had in mind the simplicity for the developper and/
 So we focused on the human readability aspect while keeping a flexible set of advanced tools. 
 A exemple is worth a thousand words, so `bot.md :` looks like :
 ```markdown
-#Beginning
-* `pause(3000)`
+# Beginning
+* `pause(3000)`	// Will wait for 3 seconds
 * Hello, how are you?
-* `input(mood)`
+* `input(mood)`		// Will save the answer into siribro.answers["mood"]
 * My name is Julien, I would like to introduce our products
 * Shall I continue?
-* `input()`
-	1.	[Yes]
+* `input()`		// Won't save the user answer
+	1.	[Yes]		// But will use it as the last answer for this choice
 		* Cool ;)
 		* We are a small company based in Montreal
 		* We sell or rent appartment downtown
@@ -60,19 +56,18 @@ A exemple is worth a thousand words, so `bot.md :` looks like :
 			2. Other
 				* Oh I see. 
 				* Maybe we can stay in touch!
-				* `goto(Finish)`
+				* `goto(Finish)`	// will go to the bloc called "Finish"
 	2. Other
 		* Ok no prob. Let me know if you need anything ;)
-		* `goto(Finish)`
+		* `goto(Finish)`	
 		
-#Finish
+# Finish
 * Have a great day !
 
 [Yes]
 	* yes
 	* sure
 	* ok
-
 ```
 
 
@@ -97,7 +92,7 @@ siribro.loadMD("file.md");
 ```
 or 
 ```javascript	
-siribro.loadJson("file.json");	
+siribro.loadJSON("file.json");	
 ```
 
 Now you can start the dialog with `start()`. It takes a optional parameter to set the entry point of the discussion (the name of a dialog bloc) .
@@ -338,9 +333,26 @@ siribro.addFunction("ageBelow18",function(){
 });
 ```
 
+### Markdown to JSON
+If you want to export what you wrote in markdown in a JSON format, just call `siribro.getConversationAsJson()` in the console after you called `loadMD()`.
+This will give you a JSON string you can prettify as needed.
 
 
-Have fun and feel free to give feedback or implementation you made !  
+### Todo list & known bugs
+These items are known issues with this library :
+
+* Handle variable in sentence
+* Handle emoticon
+* Handle link
+* Handle embedded image
+* History issue : The history is loading fine but we need to navigate to the last conversationnal step
+* Remove jQuery dependency
+* The typing animation is a gif that add some weight to the library. We will remove it in the future
+* A bug exist when you place a comment on a line without putting a space before the comment (it's a regex issue)
+
+
+
+Have fun with Siribro! 
 :smile:
 
 
