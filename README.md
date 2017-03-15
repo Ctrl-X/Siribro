@@ -11,8 +11,8 @@ We will try to remove this dependency in a future version.
 
 # Installation 
 
-* Download [siribro.min.js](TODO).
-* Get a sample dialog file like [simplebot.md](TODO)
+* Download [siribro.min.js](https://github.com/Ctrl-X/Siribro/blob/master/js/siribro.min.js).
+* Get a sample dialog file like [simplebot.md](https://github.com/Ctrl-X/Siribro/blob/master/data/bot.md)
 * Link the javascript to your html page :
 ```html    
 <script type="application/javascript" src="siribro.min.js"></script>
@@ -76,8 +76,8 @@ Siribro use either *JSON* or *Markdown* to compute the discussion flow.
 Most of the time, you will prefer the simplicity of markdown, but if you want to build the discussion from a server side database (or else), JSON is supported natively in many server side technology (php, JAVA, etc) so it may be the best choice.
 
 For simplicity, we will only present the markdown version but you can find all dialog sample in JSON and MD here :
-* [JSON format] (http://TODO)
-* [Markdown format] (http://TODO)
+> [Sample format] (https://github.com/Ctrl-X/Siribro/tree/master/data)
+
 
 Now you can learn more by reading the **"How to create a dialog file"** section
 
