@@ -7,5 +7,13 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     library: 'siribro',
     libraryTarget: 'umd'
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        use: 'babel-loader'
+      }
+    ]
   }
 };
