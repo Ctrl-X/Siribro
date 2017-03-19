@@ -165,7 +165,7 @@ function buildBloc(lines){
   return jsonBlock;
 }
 
-function fromMarkdown(markdownString){
+function parseMarkdown(markdownString){
   var json = null;
 
   const linePattern = new RegExp(/^.*$/,"gm");  // Anything that ends with a newline
@@ -215,28 +215,4 @@ function fromMarkdown(markdownString){
   return json;
 }
 
-function load(fileUrl, fileType, callback) {
-  $.ajax({
-    url: fileUrl,
-    beforeSend: function (xhr) {
-      xhr.overrideMimeType(fileType + "; charset=utf-8");
-    },
-    complete: function (jqXHR, status) {
-      if (status != "success") {
-        throw "Ajax call failed : " + status;
-      }
-    }
-  }).done(function (data) {
-    if (data != null && data.length > 0) {
-      if( fileType == "application/json"){
-        callback(data);
-      }else if( fileType == "text/markdown"){
-        callback(fromMarkdown(data));
-      }
-    }
-  });
-}
-
-module.exports = {
-  load
-};
+module.exports = parseMarkdown;

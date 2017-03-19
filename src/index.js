@@ -1,5 +1,5 @@
 const isArray = require('lodash/isArray');
-const { load } = require('./parser');
+const load = require('./load');
 
 var expose = {};
 var options;
@@ -91,7 +91,6 @@ function init() {
   needScrollAtBottomBeforeAppending = true;
 
 
-  $(document).ajaxStop(loadingStop);
   chatZone.on("submit", onUserInput);
 
   inputZone.focus();
@@ -152,24 +151,6 @@ function loadingStop() {
   });
 
   onAjaxStopCallbacks = [];
-}
-
-
-
-function loadJSON(jsonUrl) {
-  load(jsonUrl,"application/json", (data) => {
-    isInitialized = true;
-    conversationalJson = data;
-  });
-  return this;
-}
-
-function loadMD(mdUrl){
-  load(mdUrl,"text/markdown", (data) => {
-    isInitialized = true;
-    conversationalJson = data;
-  });
-  return this;
 }
 
 
@@ -1013,8 +994,14 @@ function getConversationAsJson(){
 
 
 
-expose.loadJSON = loadJSON;
-expose.loadMD = loadMD;
+expose.loadJSON = expose.loadMD = function(url) {
+  load(url).then((data) => {
+    isInitialized = true;
+    conversationalJson = data;
+    loadingStop();
+  });
+  return this;
+};
 expose.setOptions = setOptions;
 expose.start = start;
 expose.addFunction = addFunction;

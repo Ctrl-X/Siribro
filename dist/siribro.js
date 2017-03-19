@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -112,6 +112,29 @@ module.exports = isArray;
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var parseMarkdown = __webpack_require__(2);
+
+function load(url) {
+  return window.fetch(url, { method: 'GET' }).then(function (res) {
+    if (res.headers.get('Content-Type') !== 'application/json') {
+      return res.text().then(function (markdown) {
+        return parseMarkdown(markdown);
+      });
+    }
+
+    return res.json();
+  });
+}
+
+module.exports = load;
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -279,7 +302,7 @@ function buildBloc(lines) {
   return jsonBlock;
 }
 
-function fromMarkdown(markdownString) {
+function parseMarkdown(markdownString) {
   var json = null;
 
   var linePattern = new RegExp(/^.*$/, "gm"); // Anything that ends with a newline
@@ -326,34 +349,10 @@ function fromMarkdown(markdownString) {
   return json;
 }
 
-function load(fileUrl, fileType, callback) {
-  $.ajax({
-    url: fileUrl,
-    beforeSend: function beforeSend(xhr) {
-      xhr.overrideMimeType(fileType + "; charset=utf-8");
-    },
-    complete: function complete(jqXHR, status) {
-      if (status != "success") {
-        throw "Ajax call failed : " + status;
-      }
-    }
-  }).done(function (data) {
-    if (data != null && data.length > 0) {
-      if (fileType == "application/json") {
-        callback(data);
-      } else if (fileType == "text/markdown") {
-        callback(fromMarkdown(data));
-      }
-    }
-  });
-}
-
-module.exports = {
-  load: load
-};
+module.exports = parseMarkdown;
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -362,9 +361,7 @@ module.exports = {
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var isArray = __webpack_require__(0);
-
-var _require = __webpack_require__(1),
-    load = _require.load;
+var load = __webpack_require__(1);
 
 var expose = {};
 var options;
@@ -446,7 +443,6 @@ function init() {
 
   needScrollAtBottomBeforeAppending = true;
 
-  $(document).ajaxStop(loadingStop);
   chatZone.on("submit", onUserInput);
 
   inputZone.focus();
@@ -500,22 +496,6 @@ function loadingStop() {
   });
 
   onAjaxStopCallbacks = [];
-}
-
-function loadJSON(jsonUrl) {
-  load(jsonUrl, "application/json", function (data) {
-    isInitialized = true;
-    conversationalJson = data;
-  });
-  return this;
-}
-
-function loadMD(mdUrl) {
-  load(mdUrl, "text/markdown", function (data) {
-    isInitialized = true;
-    conversationalJson = data;
-  });
-  return this;
 }
 
 function start(blocName) {
@@ -1229,8 +1209,14 @@ function getConversationAsJson() {
   if (conversationalJson) return JSON.stringify(conversationalJson);
 }
 
-expose.loadJSON = loadJSON;
-expose.loadMD = loadMD;
+expose.loadJSON = expose.loadMD = function (url) {
+  load(url).then(function (data) {
+    isInitialized = true;
+    conversationalJson = data;
+    loadingStop();
+  });
+  return this;
+};
 expose.setOptions = setOptions;
 expose.start = start;
 expose.addFunction = addFunction;
