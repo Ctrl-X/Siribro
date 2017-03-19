@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "dev": "webpack --watch",
     "build": "webpack && webpack -p"
   },
   "devDependencies": {
