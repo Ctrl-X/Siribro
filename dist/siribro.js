@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 15);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -117,7 +117,17 @@ module.exports = isArray;
 "use strict";
 
 
-__webpack_require__(13);
+__webpack_require__(14);
+
+var html = __webpack_require__(12);
+
+function init(element) {
+  element.innerHTML += html;
+}
+
+module.exports = {
+  init: init
+};
 
 /***/ }),
 /* 2 */
@@ -2529,6 +2539,12 @@ exports.push([module.i, "#chatContainer {\n  margin: 50px 0 0;\n  bottom: 10px;\
 
 /***/ }),
 /* 12 */
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"chatContainer\" style=\"display:none\" class=\"close\">\n  <form data-id=\"chatZone\">\n    <div class=\"chatZone\">\n      <div class=\"textZoneContainer\">\n        <div data-id=\"flowZone\" class=\"textZone\"><!-- Here come new text --></div>\n      </div>\n      <div class=\"inputArea\">\n        <input type=\"text\" placeholder=\"Type a message\" data-id=\"inputZone\">\n        <input type=\"submit\" value=\"Send\" style=\"display:none\"/>\n      </div>\n    </div>\n  </form>\n</div>\n"
+
+/***/ }),
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -2805,7 +2821,7 @@ function updateLink(linkElement, options, obj) {
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
@@ -2814,7 +2830,7 @@ function updateLink(linkElement, options, obj) {
 var content = __webpack_require__(11);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(12)(content, {});
+var update = __webpack_require__(13)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -2831,7 +2847,7 @@ if(false) {
 }
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2899,7 +2915,7 @@ function init() {
     botface: "data:image/png;base64,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"
   };
 
-  generateHtml();
+  DOM.init(window.document.body);
 
   replyTemplate = $('<div class="message" data-id="messageBloc"><table cellpadding="0" cellspacing="0" border="0"><tr><td><div class="portrait"></div></td><td><div class="sentence" data-id="sentenceZone"><div data-id="phraseZone"></div><div class="interphrase"></div></div></td></tr></table></div>');
   inputZone = $('[data-id="inputZone"]');

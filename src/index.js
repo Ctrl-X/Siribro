@@ -65,7 +65,7 @@ function init() {
   };
 
 
-  generateHtml();
+  DOM.init(window.document.body);
 
   replyTemplate = $('<div class="message" data-id="messageBloc"><table cellpadding="0" cellspacing="0" border="0"><tr><td><div class="portrait"></div></td><td><div class="sentence" data-id="sentenceZone"><div data-id="phraseZone"></div><div class="interphrase"></div></div></td></tr></table></div>');
   inputZone = $('[data-id="inputZone"]');
