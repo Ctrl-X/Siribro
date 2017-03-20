@@ -107,7 +107,7 @@ function setOptions(optionList){
           options[key] = optionList[key];
         }
       }
-      siribro.options = options;
+      expose.options = options;
 
     }catch(ex){
       log("ERROR : Unable to set options. Reason : ", ex.message)
@@ -168,7 +168,7 @@ function start(blocName) {
       if (useranswers == null) {
         useranswers = {};
       }
-      siribro.answers = useranswers;
+      expose.answers = useranswers;
       options.isHistoryLoaded = true;
     }else{
       log("ERROR : Unable the set isPersistHistory to true. Reason : you need to include the cookie management library", "https://github.com/js-cookie/js-cookie ")
@@ -496,7 +496,7 @@ function onUserInput(event) {
     var dataName = currentConversationStep["data"];
     if (dataName){
       useranswers[dataName] = lastUserInput;
-      siribro.answers = useranswers;
+      expose.answers = useranswers;
       if(options.isPersistHistory)
         Cookies.set("answers", useranswers);
     }
