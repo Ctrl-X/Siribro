@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "webpack --watch",
+    "build": "webpack && webpack -p"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.0",
+    "css-loader": "^0.27.3",
+    "lodash": "^4.17.4",
+    "raw-loader": "^0.5.1",
+    "style-loader": "^0.14.1",
+    "webpack": "^2.2.1"
+  }
+}
